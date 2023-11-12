@@ -50,19 +50,19 @@
         </div>
         </div>
 
-    <div class="div-content">
-        {% if not_found %}
-            <p>The article with ID {{ article_id }} was not found.</p>
-        {% else %}
-            <p>The article with ID  {{ article_id }} was delete with sucess!</p>
-        {% endif %}
-        
+    <div class="div-content">        
+        <p></p>
         <form method="post" action="{% url 'crud_items/delete_article.html' %}">
             {% csrf_token %}
             <label for="id">Articles ID to be deleted:</label>
             <input type="text" id="id" name="id" required>
             <button type="submit">Delete Article</button>
         </form>
+        {% if not_found %}
+            <p>The article with ID {{ article_id }} was not found.</p>
+        {% else %}
+            <p>The article with ID  {{ article_id }} was delete with sucess!</p>
+        {% endif %}
         <p></p>
         <a href=".." target="_self">Back to home</a>
     </div>

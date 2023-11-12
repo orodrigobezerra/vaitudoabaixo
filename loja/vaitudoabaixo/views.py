@@ -94,15 +94,14 @@ def delete_article(request):
     if request.method == 'POST':
         article_id = request.POST.get('id')
 
-        # Verifica se o artigo existe
         try:
             article = Articles.objects.get(id=article_id)
             article_name = article.name
             article.delete()
             return render(request, 'crud_items/delete_article.html', {'article_name': article_name})
         except Articles.DoesNotExist:
-            return render(request, 'crud_items/delete_article.html', {'not_found': True})
-
+            return render(request, 'crud_items/delete_article.html', {'not_found': True, 'article_name': article_name})
+    
     return render(request, 'crud_items/delete_article.html')
 
 def list_users(request):

@@ -52,18 +52,18 @@
     </div>
 
     <div class="div-content">
-        {% if not_found %}
-            <p>The user with ID {{ article_id }} was not found.</p>
-        {% else %}
-            <p>The user with ID  {{ article_id }} was delete with sucess!</p>
-        {% endif %}
-        
+        <p></p>
         <form method="post" action="{% url 'crud_users/delete_user.html' %}">
             {% csrf_token %}
             <label for="id">Users ID to be deleted:</label>
             <input type="text" id="id" name="id" required>
             <button type="submit">Delete User</button>
         </form>
+        {% if not_found %}
+        <p>The user with ID {{ article_id }} was not found.</p>
+    {% else %}
+        <p>The user with ID  {{ article_id }} was delete with sucess!</p>
+    {% endif %}
         <p></p>
         <a href=".." target="_self">Back to home</a>
     </div>
