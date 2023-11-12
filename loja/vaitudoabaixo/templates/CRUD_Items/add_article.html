@@ -1,0 +1,92 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css">
+        <script src="https://kit.fontawesome.com/c035f4c5b7.js" crossorigin="anonymous"></script>
+        <title>Add Articles</title>
+    </head>
+    <body>
+        <div class="main">
+            <div class="container">
+                <div class="vert-menu" onmouseover="toggleMenu(event)" onmouseout="toggleMenu(event)">
+                    <img class="logo-header" src="{% static 'images/VaiTudoAbaixo-LOGO-WHITE.png' %}" alt="Logo" width="100%">
+                    <div id="menu" style="display: none;">
+                        <h1>BackEnd</h1>
+                        <br/>
+                        <div>
+                            <nav class="vertical-menu">
+                                <h3>Users</h3>
+                                <ul>
+                                    <li><a href="../list_users" target="_self">Users List</a></li>
+                                    <li><a href="../regist_user" target="_self">Register User</a></li>
+                                    <li><a href="../update_user" target="_self">Update User</a></li>
+                                    <li><a href="../delete_user" target="_self">Delete User</a></li>
+                                </ul>
+                                <br/>
+                            </nav>
+                            <h3>Articles</h3>
+                            <nav class="vertical-menu">
+                                <ul>
+                                    <li><a href="../list_articles" target="_self">Articles List</a></li>
+                                    <li><a href="" target="_self">Add Article</a></li>
+                                    <li><a href="../search_articles" target="_self">Search Article</a></li>
+                                    <li><a href="../update_articles" target="_self">Update Article</a></li>
+                                    <li><a href="../delete_articles" target="_self">Delete Article</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="horizontal-menu">
+                <input type="text" class="search-bar" placeholder="Search Articles..." />
+                <input class="button-search" type="button" value="">
+                <li><a href="../../" target="_self">Login</a></li>
+                <li><a href="../regist_user" target="_self">Register</a></li>
+                
+            </div>
+        
+        </div>
+        
+        <div class="div-content">
+            <h1>Add a new article</h1>
+            {% if success %}
+                <h2>Dados inseridos com sucesso!</h2>
+                <h3>Nome: {{ name }}</h3>
+                <h3>Cor: {{ color }}</h3>
+                <h3>Artigo: {{ instrument }}</h3>
+                <h3>Quantidade em Estoque: {{ qtystock }}</h3>
+                <h3>Preço: {{ price }}</h3>
+                <br/>
+            {% else %}
+                <form id="myform" method="post" action="">
+                    {% csrf_token %}
+                    <input type="text" name="name" maxlength="100" size="60" value="" placeholder="Name">
+                    <br/><br/>
+                    <input type="text" name="color" size="60" value="" placeholder="Color">
+                    <br/><br/>
+                    <input type="text" name="instrument" maxlength="20" size="60" value="" placeholder="Instrument">
+                    <br/><br/>
+                    <input type="text" name="qtystock" maxlength="100" size="60" placeholder="Qty Stock">
+                    <br/><br/>
+                    <input type="text" name="price" maxlength="20" size="60" value="" placeholder="Price">
+                    <br/><br/>
+                    <input type="text" name="image" maxlength="255" size="60" value="" placeholder="Image">
+                    <br/><br/>
+                    <input type="submit" value="Confirm">
+                </form>
+            {% endif %}
+            <p></p>
+            <a href="../" target="_self">Back to Home</a>
+        </div>
+
+        <script src="{% static 'js/script.js' %}"></script>
+    </body>
+</html>

@@ -1,0 +1,86 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css">
+    <script src="https://kit.fontawesome.com/c035f4c5b7.js" crossorigin="anonymous"></script>
+    <title>Update Article</title>
+</head>
+<body>
+    <div class="main">
+        <div class="container">
+            <div class="vert-menu" onmouseover="toggleMenu(event)" onmouseout="toggleMenu(event)">
+                <img class="logo-header" src="{% static 'images/VaiTudoAbaixo-LOGO-WHITE.png' %}" alt="Logo" width="100%">
+                <div id="menu" style="display: none;">
+                    <h1>BackEnd</h1>
+                    <br/>
+                    <div>
+                        <nav class="vertical-menu">
+                            <h3>Users</h3>
+                            <ul>
+                                <li><a href="../list_users" target="_self">Users List</a></li>
+                                <li><a href="../regist_user" target="_self">Register User</a></li>
+                                <li><a href="../update_user" target="_self">Update User</a></li>
+                                <li><a href="../delete_user" target="_self">Delete User</a></li>
+                            </ul>
+                            <br/>
+                        </nav>
+                        <h3>Articles</h3>
+                        <nav class="vertical-menu">
+                            <ul>
+                                <li><a href="../list_articles" target="_self">Articles List</a></li>
+                                <li><a href="../add_articles" target="_self">Add Article</a></li>
+                                <li><a href="../search_articles" target="_self">Search Article</a></li>
+                                <li><a href="" target="_self">Update Article</a></li>
+                                <li><a href="../delete_articles" target="_self">Delete Article</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="horizontal-menu">
+            <input type="text" class="search-bar" placeholder="Search Articles..." />
+            <input class="button-search" type="button" value="">
+            <li><a href="../../" target="_self">Login</a></li>
+            <li><a href="../regist_user" target="_self">Register</a></li>
+            
+        </div>
+    
+    </div>
+
+    <div class="div-content">
+        <form id="myform" method="post" action="{% url 'crud_items/update_article.html' %}">
+            {% csrf_token %}
+            <p>Insert ID to update article:</p>
+            <input type="text" name="id" maxlength="20" size="20" value="" placeholder="ID">
+            <br/><br/>
+            <hr>
+            <p>Insert new data</p>
+            <input type="text" name="new_name" maxlength="100" size="100" value="" placeholder="New name">
+            <br/><br/>
+            <input type="text" name="new_color" size="100" value="" placeholder="Nova color">
+            <br/><br/>
+            <input type="text" name="new_instrument" maxlength="100" size="100" value="" placeholder="New instrument">
+            <br/><br/>
+            <input type="text" name="new_qtystock" size="100" value="" placeholder="New Qty Stock">
+            <br/><br/>
+            <input type="text" step="0.01" name="new_price" maxlength="100" size="100" value="" placeholder="New Price">
+            <br/><br/>
+            <input type="text" name="new_image" maxlength="255" size="100" value="" placeholder="New Image">
+            <br/><br/>
+            <input type="submit" value="Update">
+        </form>
+        <p></p>
+        <a href=".." target="_self">Back to home</a>
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

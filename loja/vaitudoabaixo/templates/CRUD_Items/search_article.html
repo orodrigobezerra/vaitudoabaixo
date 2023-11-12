@@ -1,0 +1,66 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css">
+    <script src="https://kit.fontawesome.com/c035f4c5b7.js" crossorigin="anonymous"></script>
+    <title>Search Article</title>
+</head>
+<div class="main">
+    <div class="container">
+        <div class="vert-menu" onmouseover="toggleMenu(event)" onmouseout="toggleMenu(event)">
+            <img class="logo-header" src="{% static 'images/VaiTudoAbaixo-LOGO-WHITE.png' %}" alt="Logo" width="100%">
+            <div id="menu" style="display: none;">
+                <h1>BackEnd</h1>
+                <br/>
+                <div>
+                    <nav class="vertical-menu">
+                        <h3>Users</h3>
+                        <ul>
+                            <li><a href="../list_users" target="_self">Users List</a></li>
+                            <li><a href="../regist_user" target="_self">Register User</a></li>
+                            <li><a href="../update_user" target="_self">Update User</a></li>
+                            <li><a href="../delete_user" target="_self">Delete User</a></li>
+                        </ul>
+                        <br/>
+                    </nav>
+                    <h3>Articles</h3>
+                    <nav class="vertical-menu">
+                        <ul>
+                            <li><a href="../list_articles" target="_self">Articles List</a></li>
+                            <li><a href="../add_articles" target="_self">Add Article</a></li>
+                            <li><a href="" target="_self">Search Article</a></li>
+                            <li><a href="../update_articles" target="_self">Update Article</a></li>
+                            <li><a href="../delete_articles" target="_self">Delete Article</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="horizontal-menu">
+        <input type="text" class="search-bar" placeholder="Search Articles..." />
+        <input class="button-search" type="button" value="">
+        <li><a href="../../" target="_self">Login</a></li>
+        <li><a href="../regist_user" target="_self">Register</a></li>
+        
+    </div>
+
+</div>
+    <div class="div-content">
+        <h1>Search Article</h1>
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="search_name" placeholder="Search by name">
+            <input type="submit" value="Search">
+        </form>
+        <p></p>
+
+        <a href=".." target="_self">Back to home</a>
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
