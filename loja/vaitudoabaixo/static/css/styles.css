@@ -121,6 +121,16 @@ h3 {
     list-style: none;
 }
 
+.horizontal-menu a:hover {
+    background-color: #f0f0f0; /* Light grey on hover */
+    color: darkblue;
+}
+
+.horizontal-menu a.active {
+    background-color: #04AA6D; /* Green for active item */
+    color: darkblue;
+}
+
 .search-bar {
     padding: 8px; /* Ajuste o padding conforme necessário */
     border: none;
