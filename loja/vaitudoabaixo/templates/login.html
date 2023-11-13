@@ -31,22 +31,12 @@
                         <nav class="vertical-menu">
                             <h3>Users</h3>
                             <ul>
-                                <li><a href="./home/list_users" target="_self">Users List</a></li>
-                                <li><a href="./home/add_user" target="_self">Add User</a></li>
-                                <li><a href="./home/update_user" target="_self">Update User</a></li>
-                                <li><a href="./home/delete_user" target="_self">Delete User</a></li>
+                                <li><a href="../home/list_users" target="_self">Users List</a></li>
+                                <li><a href="../home/regist_user" target="_self">Register User</a></li>
+                                <li><a href="../home/update_user" target="_self">Update User</a></li>
+                                <li><a href="../home/delete_user" target="_self">Delete User</a></li>
                             </ul>
                             <br/>
-                        </nav>
-                        <h3>Articles</h3>
-                        <nav class="vertical-menu">
-                            <ul>
-                                <li><a href="./home/list_articles" target="_self">Articles List</a></li>
-                                <li><a href="./home/add_articles" target="_self">Add Article</a></li>
-                                <li><a href="./home/search_articles" target="_self">Search Article</a></li>
-                                <li><a href="./home/update_articles" target="_self">Update Article</a></li>
-                                <li><a href="./home/delete_articles" target="_self">Delete Article</a></li>
-                            </ul>
                         </nav>
                     </div>
                 </div>
@@ -56,36 +46,33 @@
         <div class="horizontal-menu">
             <input type="text" class="search-bar" placeholder="Search Articles..." />
             <input class="button-search" type="button" value="">
-            <li><a href="login" target="_self">Login</a></li>
-            <li><a href="regist_user" target="_self">Register</a></li>
-            
+            <li><a href="" target="_self">Login</a></li>
+            <li><a href="../home/regist_user" target="_self">Register</a></li>    
         </div>
-    
     </div>
-
-    <div>
-        <img class="logo-body2" src="{% static 'images/VaiTudoAbaixo-LOGO2.png' %}" alt="Logo" width="20%">
-    </div>
-
     <div class="div-content">
-        <h1>Login</h1>
-        {% if error_message %}
-            <h2>{{ error_message }}</h2>
-        {% endif %}
-        <form method="post" action="{% url 'login.html' %}">
-            {% csrf_token %}
-            <label for="name">Username:</label>
-            <input type="name" name="name" maxlength="100" size="60" required>
-            <br/><br/>
-        
-            <label for="password">Password:</label>
-            <input type="password" name="password" maxlength="100" size="60" required>
-            <br/><br/>
-        
-            <input type="submit" value="Login">
-        </form>
+        <div>
+            <img class="logo-body2" src="{% static 'images/VaiTudoAbaixo-LOGO2.png' %}" alt="Logo" width="20%">
+        </div>
+        <div class="div-content2">
+            <h1>Login</h1>
+            {% if error_message %}
+                <h2>{{ error_message }}</h2>
+            {% endif %}
+            <form method="post" action="{% url 'login.html' %}">
+                {% csrf_token %}
+                <label for="name">Username:</label>
+                <input type="name" name="name" maxlength="100" size="30" required>
+                <br/><br/>
+            
+                <label for="password">Password:</label>
+                <input type="password" name="password" maxlength="100" size="30" required>
+                <br/><br/>
+            
+                <input type="submit" value="Login">
+            </form>
+        </div>
     </div>
-    
 
     <script src="{% static 'js/script.js' %}"></script>
 </body>

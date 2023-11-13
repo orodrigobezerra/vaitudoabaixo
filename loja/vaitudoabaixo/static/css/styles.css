@@ -158,14 +158,19 @@ ul{
 }
 
 .logo-body2{
-    padding-top: 50px;
+    padding-top: 80px;
+    margin-bottom: 80px;
     display: block;
-    margin-left: 400px;
+    margin-left: 360px;
 
 }
 
 .div-content{
     margin-left: 270px;
+}
+
+.div-content2{
+    margin-left: 350px;
 }
 
 #table-articles {
