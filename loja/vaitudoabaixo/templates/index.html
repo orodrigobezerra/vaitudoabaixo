@@ -46,18 +46,19 @@
         </div>
     
         {% if user.is_authenticated %}
-        <!-- Se o usuário estiver autenticado, mostre a mensagem de boas-vindas e o botão de logout -->
-        <div class="horizontal-menu">
-            <input type="text" class="search-bar" placeholder="Search Articles..." />
-            <input class="button-search" type="button" value="">
-        </div>  
-        <div class="user-info">
-            Welcome, {{ user.name }}! <!-- ou qualquer outro campo do usuário que deseje mostrar -->
-        </div>
-        <form action="{% url 'logout' %}" method="post">
-            {% csrf_token %}
-            <input type="submit" value="Logout">
-        </form>
+            <!-- Se o usuário estiver autenticado, mostre a mensagem de boas-vindas e o botão de logout -->
+            <div class="horizontal-menu">
+                <input type="text" class="search-bar" placeholder="Search Articles..." />
+                <input class="button-search" type="button" value="">
+             
+                <div class="user-info">
+                    Welcome, {{ user.name }}! <!-- ou qualquer outro campo do usuário que deseje mostrar -->
+                </div>
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Logout">
+                </form>
+            </div> 
     
         {% else %}
             <!-- Se o usuário não estiver autenticado, mostre os botões Login e Register -->
