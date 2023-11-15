@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -14,8 +14,10 @@ class Articles(models.Model):
 
     def __str__(self):
         return self.name
+
+
     
-class MyUserManager(BaseUserManager):
+""" class MyUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
         if not email:
             raise ValueError('The Email field must be set')
@@ -30,7 +32,7 @@ class MyUserManager(BaseUserManager):
         extra_fields.setdefault('is_superuser', True)
         return self.create_user(email, password, **extra_fields)
 
-class myUser(AbstractBaseUser):
+class myUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     name = models.CharField(max_length=30)
     lastname = models.CharField(max_length=30)
@@ -41,3 +43,10 @@ class myUser(AbstractBaseUser):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['name', 'lastname']
+
+    def has_module_perms(self, app_label):
+        return self.is_staff """
+    
+class OtherModel(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+

@@ -17,22 +17,24 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from vaitudoabaixo import views
-from django.contrib.auth.views import LoginView
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.views import LoginView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     #path('', views.login_view, name='login.html'),
-    path('', views.user_login, name='user_login'),
+    path('', auth_views.LoginView.as_view(next_page = 'index'), name='user_login'),
     path('logout/', auth_views.LogoutView.as_view(next_page = 'user_login'), name='logout'),
     path('home/', views.index, name='index'),
-    path('home/list_articles/', views.list_articles, name='crud_items/list_articles.html'),
-    path('home/add_articles/', views.add_article, name='crud_items/add_article.html'),
-    path('home/search_articles/', views.search_article, name='search_article'),
-    path('home/update_articles/', views.update_article, name='crud_items/update_article.html'),
-    path('home/delete_articles/', views.delete_article, name='crud_items/delete_article.html'),
-    path('home/list_users/', views.list_users, name='crud_users/list_users.html'),
-    path('home/regist_user/', views.regist_user, name='crud_users/regist_user.html'),
-    path('home/update_user/', views.update_user, name='crud_users/update_user.html'),
-    path('home/delete_user/', views.delete_user, name='crud_users/delete_user.html'),
+    path('home/list_articles/', views.list_articles, name='list_articles'),
+    path('home/add_articles/', views.add_article, name='add_articles'),
+    path('home/search_articles/', views.search_article, name='search_articles'),
+    path('home/update_articles/', views.update_article, name='update_articles'),
+    path('home/delete_articles/', views.delete_article, name='delete_articles'),
+    path('home/list_users/', views.list_users, name='list_users'),
+    path('home/regist_user/', views.regist_user, name='regist_user'),
+    path('home/update_user/', views.update_user, name='update_user'),
+    path('home/delete_user/', views.delete_user, name='delete_user'),
+    path('export/users/', views.export_users, name='export_users'),
+    path('export/articles/', views.export_articles, name='export_articles'),
 ]

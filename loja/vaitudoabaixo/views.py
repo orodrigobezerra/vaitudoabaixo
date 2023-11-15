@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
-from .models import Articles, myUser, MyUserManager
-from django.contrib.auth import authenticate, login
+from .models import Articles, User
+from django.contrib.auth import authenticate, login as auth_login, get_user_model
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
-import logging
+from django.http import HttpResponse, StreamingHttpResponse
+import logging, csv
 
 logger = logging.getLogger(__name__)
 
@@ -107,7 +107,7 @@ def delete_article(request):
 
 @login_required(login_url='user_login')
 def list_users(request):
-    users = myUser.objects.all()
+    users = User.objects.all()
     return render(request, 'crud_users/list_users.html', {'users': users})
 
 def regist_user(request):
@@ -117,13 +117,13 @@ def regist_user(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
 
-        if myUser.objects.filter(email=email).exists():
+        if User.objects.filter(email=email).exists():
             return render(request, 'crud_users/regist_user.html', {'error_message': 'User with this email already exists'})
 
         # Use o método create_user fornecido pelo seu MyUserManager
-        user = myUser.objects.create_user(email=email, password=password, name=name, lastname=lastname)
+        user = User.objects.create_user(email=email, password=password, name=name, lastname=lastname)
 
-        return redirect('user_login')
+        return redirect('login')
     else:
         return render(request, 'crud_users/regist_user.html')
 
@@ -135,8 +135,8 @@ def update_user(request):
         new_email = request.POST.get('new_email')
         new_password = request.POST.get('new_password')  # Corrigido o nome do campo
 
-        # Obtém o usuário usando o modelo myUser
-        user = myUser.objects.get(email=new_email)
+        # Obtém o usuário usando o modelo User
+        user = User.objects.get(email=new_email)
 
         user.name = new_name
         user.lastname = new_lastname
@@ -156,16 +156,17 @@ def update_user(request):
 @login_required(login_url='user_login')
 def delete_user(request):
     if request.method == 'POST':
-        email = request.POST.get('email')  # Alterado para 'email'
+        email = request.POST.get('email')
 
-        try:
-            # Obtém o usuário usando o modelo myUser
-            user = myUser.objects.get(email=email)
-            user_name = user.name
-            user.delete()
-            return render(request, 'crud_users/delete_user.html', {'user_name': user_name})
-        except myUser.DoesNotExist:  # Alterado para 'myUser'
-            return render(request, 'crud_users/delete_user.html', {'not_found': True})
+        # Obtém o usuário usando o modelo User
+        user = get_user_model().objects.get(email=email)
+        user_name = user.name
+
+        # Desativa o usuário em vez de excluí-lo
+        user.is_active = False
+        user.save()
+
+        return render(request, 'crud_users/delete_user.html', {'user_name': user_name})
 
     return render(request, 'crud_users/delete_user.html')
 
@@ -177,7 +178,7 @@ def user_login(request):
         user = authenticate(request, email=email, password=password)
         if user is not None:
             logger.info(f'Successful login for user: {user.email}')
-            login(request, user)
+            auth_login(request, user)  # Use auth_login em vez de login
             return redirect('index')  # Redireciona para a URL nomeada 'index'
         else:
             logger.warning(f'Failed login attempt for email: {email}, password: {password}')
@@ -185,29 +186,29 @@ def user_login(request):
     else:
         return render(request, 'login.html')
 
+
+@login_required(login_url='user_login')
 def export_users(request):
-    # Para usuários do seu modelo myUser
-    custom_users = myUser.objects.all()
-    custom_users_data = [f"Email: {user.email}, Password: {user.password}" for user in custom_users]
+    users = User.objects.all()
 
-    return HttpResponse("\n".join(custom_users_data), content_type="text/plain")
+    def generate_csv():
+        yield "Email,Password\n"
+        for user in users:
+            yield f"{user.email},{user.password}\n"
 
-""" def login_view(request):
-    if request.method == 'POST':
-        # Lógica de autenticação aqui
-        name = request.POST.get('name')
-        password = request.POST.get('password')
-        logger.debug(f'Attempting login for name: {name}')
-        
-        user = authenticate(request, name=name, password=password)
+    response = StreamingHttpResponse(generate_csv(), content_type="text/csv")
+    response['Content-Disposition'] = 'attachment; filename="users.csv"'
+    return response
 
-        if user is not None:
-            auth_login(request, user)
-            messages.success(request, 'Login successful.')
-            logger.info('Login successful')
-            return redirect('index')
-        else:
-            messages.error(request, 'Invalid credentials. Try again.')
-            logger.error('Invalid credentials')
+@login_required(login_url='user_login')
+def export_articles(request):
+    articles = Articles.objects.all()
 
-    return redirect('index') """
+    def generate_csv():
+        yield "Name,Color,Instrument,Qty_Stock,Price,Image\n"
+        for article in articles:
+            yield f"{article.name},{article.color},{article.instrument},{article.qty_stock},{article.price},{article.image}\n"
+
+    response = StreamingHttpResponse(generate_csv(), content_type="text/csv")
+    response['Content-Disposition'] = 'attachment; filename="articles.csv"'
+    return response

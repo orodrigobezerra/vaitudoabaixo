@@ -24,7 +24,7 @@
                             <h3>Users</h3>
                             <ul>
                                 <li><a href="../list_users" target="_self">Users List</a></li>
-                                <li><a href="../regist_user" target="_self">Register User</a></li>
+                                <li><a href="" target="_self">Register User</a></li>
                                 <li><a href="../update_user" target="_self">Update User</a></li>
                                 <li><a href="../delete_user" target="_self">Delete User</a></li>
                             </ul>
@@ -36,7 +36,7 @@
                                 <li><a href="../list_articles" target="_self">Articles List</a></li>
                                 <li><a href="../add_articles" target="_self">Add Article</a></li>
                                 <li><a href="../search_articles" target="_self">Search Article</a></li>
-                                <li><a href="" target="_self">Update Article</a></li>
+                                <li><a href="../update_articles" target="_self">Update Article</a></li>
                                 <li><a href="../delete_articles" target="_self">Delete Article</a></li>
                             </ul>
                         </nav>
@@ -45,20 +45,31 @@
             </div>
         </div>
     
-        <div class="horizontal-menu">
-            <input type="text" class="search-bar" placeholder="Search Articles..." />
-            <input class="button-search" type="button" value="">
-            
-            {% if user.is_authenticated %}
-            <div class="user-info">
-                Welcome, {{ user.name }}! <!-- ou qualquer outro campo do utilizador que deseje mostrar -->
-            </div>
-            {% else %}
-                <!-- Se o utilizador não estiver autenticado, mostre os botões Login e Register -->
+        {% if user.is_authenticated %}
+            <!-- Se o usuário estiver autenticado, mostre a mensagem de boas-vindas e o botão de logout -->
+            <div class="horizontal-menu">
+                <input type="text" class="search-bar" placeholder="Search Articles..." />
+                <input class="button-search" type="button" value="">
+                
+                <div class="user-info">
+                    Welcome, {{ user.username }}! <!-- ou qualquer outro campo do usuário que deseje mostrar -->
+                </div>
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Logout">
+                </form>
+            </div> 
+    
+        {% else %}
+            <!-- Se o usuário não estiver autenticado, mostre os botões Login e Register -->
+            <div class="horizontal-menu">
+                <input type="text" class="search-bar" placeholder="Search Articles..." />
+                <input class="button-search" type="button" value="">
+                
                 <li><a href="{% url 'user_login' %}" target="_self">Login</a></li>
-                <li><a href="{% url 'register' %}" target="_self">Register</a></li>
-            {% endif %}
-        </div>
+                <li><a href="{% url 'regist_user' %}" target="_self">Register</a></li>
+            </div>
+        {% endif %}
     
     </div>
 
