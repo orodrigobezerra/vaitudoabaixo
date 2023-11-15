@@ -74,7 +74,7 @@
     </div>
 
     <div class="div-content">
-        <form id="myform" method="post" action="{% url 'crud_items/update_article.html' %}">
+        <form id="myform" method="post" action="{% url 'update_articles' %}">
             {% csrf_token %}
             <p>Insert ID to update article:</p>
             <input type="text" name="id" maxlength="20" size="20" value="" placeholder="ID">

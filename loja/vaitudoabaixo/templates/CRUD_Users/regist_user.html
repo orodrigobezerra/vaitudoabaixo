@@ -12,88 +12,84 @@
     <title>Add Users</title>
 </head>
 <body>
-<div class="main">
-    <div class="container">
-        <div class="vert-menu" onmouseover="toggleMenu(event)" onmouseout="toggleMenu(event)">
-            <img class="logo-header" src="{% static 'images/VaiTudoAbaixo-LOGO-WHITE.png' %}" alt="Logo" width="100%">
-            <div id="menu" style="display: none;">
-                <h1>BackEnd</h1>
-                <br/>
-                <div>
-                    <nav class="vertical-menu">
-                        <h3>Users</h3>
-                        <ul>
-                            <li><a href="../list_users" target="_self">Users List</a></li>
-                            <li><a href="" target="_self">Register User</a></li>
-                            <li><a href="../update_user" target="_self">Update User</a></li>
-                            <li><a href="../delete_user" target="_self">Delete User</a></li>
-                        </ul>
-                        <br/>
-                    </nav>
-                    <h3>Articles</h3>
-                    <nav class="vertical-menu">
-                        <ul>
-                            <li><a href="../list_articles" target="_self">Articles List</a></li>
-                            <li><a href="../add_articles" target="_self">Add Article</a></li>
-                            <li><a href="../search_articles" target="_self">Search Article</a></li>
-                            <li><a href="../update_articles" target="_self">Update Article</a></li>
-                            <li><a href="../delete_articles" target="_self">Delete Article</a></li>
-                        </ul>
-                    </nav>
+    <div class="main">
+        <div class="container">
+            <div class="vert-menu" onmouseover="toggleMenu(event)" onmouseout="toggleMenu(event)">
+                <img class="logo-header" src="{% static 'images/VaiTudoAbaixo-LOGO-WHITE.png' %}" alt="Logo" width="100%">
+                <div id="menu" style="display: none;">
+                    <h1>BackEnd</h1>
+                    <br/>
+                    <div>
+                        <nav class="vertical-menu">
+                            <h3>Users</h3>
+                            <ul>
+                                <li><a href="../list_users" target="_self">Users List</a></li>
+                                <li><a href="" target="_self">Register User</a></li>
+                                <li><a href="../update_user" target="_self">Update User</a></li>
+                                <li><a href="../delete_user" target="_self">Delete User</a></li>
+                            </ul>
+                            <br/>
+                        </nav>
+                        <h3>Articles</h3>
+                        <nav class="vertical-menu">
+                            <ul>
+                                <li><a href="../list_articles" target="_self">Articles List</a></li>
+                                <li><a href="../add_articles" target="_self">Add Article</a></li>
+                                <li><a href="../search_articles" target="_self">Search Article</a></li>
+                                <li><a href="../update_articles" target="_self">Update Article</a></li>
+                                <li><a href="../delete_articles" target="_self">Delete Article</a></li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
             </div>
         </div>
+    
+        {% if user.is_authenticated %}
+            <!-- Se o usuário estiver autenticado, mostre a mensagem de boas-vindas e o botão de logout -->
+            <div class="horizontal-menu">
+                <input type="text" class="search-bar" placeholder="Search Articles..." />
+                <input class="button-search" type="button" value="">
+                
+                <div class="user-info">
+                    Welcome, {{ user.username }}! <!-- ou qualquer outro campo do usuário que deseje mostrar -->
+                </div>
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Logout">
+                </form>
+            </div> 
+    
+        {% else %}
+            <!-- Se o usuário não estiver autenticado, mostre os botões Login e Register -->
+            <div class="horizontal-menu">
+                <input type="text" class="search-bar" placeholder="Search Articles..." />
+                <input class="button-search" type="button" value="">
+                
+                <li><a href="{% url 'user_login' %}" target="_self">Login</a></li>
+                <li><a href="{% url 'regist_user' %}" target="_self">Register</a></li>
+            </div>
+        {% endif %}
+    
     </div>
 
-    {% if user.is_authenticated %}
-        <!-- Se o usuário estiver autenticado, mostre a mensagem de boas-vindas e o botão de logout -->
-        <div class="horizontal-menu">
-            <input type="text" class="search-bar" placeholder="Search Articles..." />
-            <input class="button-search" type="button" value="">
-            
-            <div class="user-info">
-                Welcome, {{ user.username }}! <!-- ou qualquer outro campo do usuário que deseje mostrar -->
-            </div>
-            <form action="{% url 'logout' %}" method="post">
-                {% csrf_token %}
-                <input type="submit" value="Logout">
+    <div class="div-content">
+        <h1 class="titles">Register a new user</h1>
+        {% if success %}
+            <h2>Data inserted successfully!</h2>
+            <!-- Incluir outros detalhes do usuário registrado, se necessário -->
+            <br/>
+        {% else %}
+            <!-- Use o formulário de registro do Django -->
+            <form method="post" action="{% url 'regist_user' %}"> {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Register">
             </form>
-        </div> 
+        {% endif %}
+        <p></p>
+        <a href="{% url 'index' %}" target="_self">Back to Home</a>
+    </div>
 
-    {% else %}
-        <!-- Se o usuário não estiver autenticado, mostre os botões Login e Register -->
-        <div class="horizontal-menu">
-            <input type="text" class="search-bar" placeholder="Search Articles..." />
-            <input class="button-search" type="button" value="">
-            
-            <li><a href="{% url 'user_login' %}" target="_self">Login</a></li>
-            <li><a href="{% url 'regist_user' %}" target="_self">Register</a></li>
-        </div>
-    {% endif %}
-
-</div>
-
-<div class="div-content">
-    <h1 class="titles">Register a new user</h1>
-    {% if success %}
-        <h2>Data inserted successfully!</h2>
-        <h3>Name: {{ name }}</h3>
-        <h3>Lastname: {{ lastname }}</h3>
-        <h3>Email: {{ email }}</h3>
-        <br/>
-    {% else %}
-        <!-- Use o formulário de registro do Django -->
-        <form method="post" action="{% url 'regist_user' %}"> {% csrf_token %}
-            {{ form.username.label_tag }} {{ form.username }}
-            {{ form.password1.label_tag }} {{ form.password1 }}
-            {{ form.password2.label_tag }} {{ form.password2 }}
-            <input type="submit" value="Register">
-        </form>
-    {% endif %}
-    <p></p>
-    <a href="../" target="_self">Back to Home</a>
-</div>
-
-<script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>

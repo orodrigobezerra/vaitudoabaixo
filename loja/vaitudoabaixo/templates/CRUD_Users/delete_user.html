@@ -1,8 +1,12 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html>
+<html lang="pt">
 <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
     <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css">
     <script src="https://kit.fontawesome.com/c035f4c5b7.js" crossorigin="anonymous"></script>
     <title>Delete User</title>
@@ -20,9 +24,9 @@
                             <h3>Users</h3>
                             <ul>
                                 <li><a href="../list_users" target="_self">Users List</a></li>
-                                <li><a href="" target="_self">Register User</a></li>
+                                <li><a href="../regist_user" target="_self">Register User</a></li>
                                 <li><a href="../update_user" target="_self">Update User</a></li>
-                                <li><a href="../delete_user" target="_self">Delete User</a></li>
+                                <li><a href="" target="_self">Delete User</a></li>
                             </ul>
                             <br/>
                         </nav>
@@ -68,25 +72,20 @@
         {% endif %}
     
     </div>
+    
+    <script src="{% static 'js/script.js' %}"></script>
 
     <div class="div-content">
-        <p></p>
-        {% if not_found %}
-            <p>The user with ID {{ article_id }} was not found.</p>
-        {% else %}
-            <!-- Use o formulário de exclusão do Django -->
-            <form method="post" action="{% url 'delete_user' %}">
-                {% csrf_token %}
-                <label for="id">Users ID to be deleted:</label>
-                <input type="text" id="id" name="id" required>
-                <button type="submit">Delete User</button>
-            </form>
-            <p>The user with ID {{ article_id }} was deleted successfully!</p>
-        {% endif %}
+        <!-- Use o formulário de exclusão do Django -->
+        <form method="post" action="{% url 'delete_user' %}">
+            {% csrf_token %}
+            <p>Enter the username of the user you want to delete:</p>
+            <input type="text" name="username" maxlength="20" size="20" placeholder="Username">
+            <br/><br/>
+            <input type="submit" value="Delete">
+        </form>
         <p></p>
         <a href=".." target="_self">Back to home</a>
     </div>
-
-    <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>

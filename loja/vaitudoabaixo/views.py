@@ -2,7 +2,11 @@ from django.shortcuts import render, redirect
 from .models import Articles, User
 from django.contrib.auth import authenticate, login as auth_login, get_user_model
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, StreamingHttpResponse
+from django.http import StreamingHttpResponse
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
+from django.contrib.auth import get_user_model
+
 import logging, csv
 
 logger = logging.getLogger(__name__)
@@ -107,67 +111,69 @@ def delete_article(request):
 
 @login_required(login_url='user_login')
 def list_users(request):
-    users = User.objects.all()
+    # Filtrar usuários excluindo superusuários
+    users = get_user_model().objects.filter(is_superuser=False)
+
     return render(request, 'crud_users/list_users.html', {'users': users})
+
 
 def regist_user(request):
     if request.method == 'POST':
-        name = request.POST.get('name')
-        lastname = request.POST.get('lastname')
-        email = request.POST.get('email')
-        password = request.POST.get('password')
+        form = UserCreationForm(request.POST)
 
-        if User.objects.filter(email=email).exists():
-            return render(request, 'crud_users/regist_user.html', {'error_message': 'User with this email already exists'})
+        if form.is_valid():
+            user = form.save()
 
-        # Use o método create_user fornecido pelo seu MyUserManager
-        user = User.objects.create_user(email=email, password=password, name=name, lastname=lastname)
+            # Autenticar o usuário antes de fazer login
+            authenticated_user = authenticate(request, username=user.username, password=form.cleaned_data['password1'])
+            if authenticated_user:
+                auth_login(request, authenticated_user)
 
-        return redirect('login')
+                messages.success(request, 'User registered successfully. You are now logged in.')
+                return redirect('index')  # Redireciona para a página inicial após o registro
+            else:
+                messages.error(request, 'Error authenticating user. Please try logging in.')
+
+        else:
+            messages.error(request, 'Error registering user. Correct the errors.')
+
     else:
-        return render(request, 'crud_users/regist_user.html')
+        form = UserCreationForm()
+
+    return render(request, 'crud_users/regist_user.html', {'form': form})
 
 @login_required(login_url='user_login')
 def update_user(request):
+    user = request.user
+
     if request.method == 'POST':
-        new_name = request.POST.get('new_name')
-        new_lastname = request.POST.get('new_lastname')
-        new_email = request.POST.get('new_email')
-        new_password = request.POST.get('new_password')  # Corrigido o nome do campo
+        # Obtém os novos dados do formulário
+        new_username = request.POST['new_username']
+        new_password = request.POST['new_password']
 
-        # Obtém o usuário usando o modelo User
-        user = User.objects.get(email=new_email)
-
-        user.name = new_name
-        user.lastname = new_lastname
-        user.email = new_email
-        user.set_password(new_password)  # Use set_password para criptografar a senha corretamente
-
+        # Atualiza os campos desejados do usuário
+        user.username = new_username
+        user.set_password(new_password)
         user.save()
 
-        return render(request, 'crud_users/update_user.html', {
-            'new_name': new_name,
-            'new_lastname': new_lastname,
-            'new_email': new_email,
-        })
-
-    return render(request, 'crud_users/update_user.html')
+        messages.success(request, 'Success, your user was updated!')
+        return redirect('update_user')  # Altere para o nome de URL apropriado
+    else:
+        return render(request, 'crud_users/update_user.html')
 
 @login_required(login_url='user_login')
 def delete_user(request):
     if request.method == 'POST':
-        email = request.POST.get('email')
+        username_to_delete = request.POST.get('username')
 
-        # Obtém o usuário usando o modelo User
-        user = get_user_model().objects.get(email=email)
-        user_name = user.name
-
-        # Desativa o usuário em vez de excluí-lo
-        user.is_active = False
-        user.save()
-
-        return render(request, 'crud_users/delete_user.html', {'user_name': user_name})
-
+        try:
+            user_to_delete = User.objects.get(username=username_to_delete)
+            user_to_delete.delete()
+            messages.success(request, f'The user {username_to_delete} has been deleted successfully.')
+            return redirect('user_login')  # Altere para o nome da URL da sua página inicial
+        except User.DoesNotExist:
+            messages.error(request, f'The user {username_to_delete} does not exist.')
+    
     return render(request, 'crud_users/delete_user.html')
 
 def user_login(request):

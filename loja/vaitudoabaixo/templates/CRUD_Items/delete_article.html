@@ -20,7 +20,7 @@
                             <h3>Users</h3>
                             <ul>
                                 <li><a href="../list_users" target="_self">Users List</a></li>
-                                <li><a href="" target="_self">Register User</a></li>
+                                <li><a href="../regist_user" target="_self">Register User</a></li>
                                 <li><a href="../update_user" target="_self">Update User</a></li>
                                 <li><a href="../delete_user" target="_self">Delete User</a></li>
                             </ul>
@@ -71,7 +71,7 @@
 
     <div class="div-content">        
         <p></p>
-        <form method="post" action="{% url 'crud_items/delete_article.html' %}">
+        <form method="post" action="{% url 'delete_articles' %}">
             {% csrf_token %}
             <label for="id">Articles ID to be deleted:</label>
             <input type="text" id="id" name="id" required>

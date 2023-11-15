@@ -77,23 +77,24 @@
 
     <div class="div-content">
         <!-- Use o formulário de atualização do Django -->
-        <form method="post" action="{% url 'update_user' %}">
-            {% csrf_token %}
-            <p>Insert ID to update user:</p>
-            <input type="text" name="id" maxlength="20" size="20" value="" placeholder="ID">
-            <br/><br/>
-            <hr>
-            <p>Insert new data</p>
-            <input type="text" name="new_name" maxlength="100" size="100" value="" placeholder="New name">
-            <br/><br/>
-            <input type="text" name="new_lastname" size="100" value="" placeholder="New Lastname">
-            <br/><br/>
-            <input type="text" name="new_email" maxlength="100" size="100" value="" placeholder="New email">
-            <br/><br/>
-            <input type="submit" value="Update">
-        </form>
-        <p></p>
-        <a href=".." target="_self">Back to home</a>
+        <div class="div-content">
+            <!-- Use o formulário de atualização do Django -->
+            <form method="post" action="{% url 'update_user' %}">
+                {% csrf_token %}
+                <p>Update your user:</p>
+                <input type="text" name="username" maxlength="20" size="20" value="{{ user.username }}" placeholder="ID">
+                <br/><br/>
+                <hr>
+                <p>Insert new data</p>
+                <input type="text" name="new_username" maxlength="20" size="20" value="" placeholder="New username">
+                <br/><br/>
+                <input type="password" name="new_password" maxlength="20" size="20" value="" placeholder="New password">
+                <br/><br/>
+                <input type="submit" value="Update">
+            </form>
+            <p></p>
+            <a href=".." target="_self">Back to home</a>
+        </div>
     </div>
 </body>
 </html>
