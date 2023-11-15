@@ -48,9 +48,15 @@
         <div class="horizontal-menu">
             <input type="text" class="search-bar" placeholder="Search Articles..." />
             <input class="button-search" type="button" value="">
-            <li><a href="../../" target="_self">Login</a></li>
-            <li><a href="../regist_user" target="_self">Register</a></li>
-            
+            {% if user.is_authenticated %}
+            <div class="user-info">
+                Bem-vindo, {{ user.name }}! <!-- ou qualquer outro campo do utilizador que deseje mostrar -->
+            </div>
+            {% else %}
+                <!-- Se o utilizador não estiver autenticado, mostre os botões Login e Register -->
+                <li><a href="{% url 'user_login' %}" target="_self">Login</a></li>
+                <li><a href="{% url 'register' %}" target="_self">Register</a></li>
+            {% endif %}
         </div>
     
     </div>
