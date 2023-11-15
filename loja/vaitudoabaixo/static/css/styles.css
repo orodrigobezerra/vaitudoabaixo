@@ -195,13 +195,17 @@ ul{
 #table-articles {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
-    width: 100%;
+    width: 70%;
   }
   
   #table-articles td, #table-articles th {
     border: 1px solid #ddd;
     padding: 8px;
     background: white;
+  }
+
+  .table-article-name{
+    width: 1%;
   }
   
   #table-articles tr:hover {background-color: #ddd;}
@@ -212,6 +216,7 @@ ul{
     text-align: left;
     background-color: darkblue;
     color: white;
+    width: 70%;
   }
 
   .titles {
