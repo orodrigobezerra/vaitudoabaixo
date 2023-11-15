@@ -45,20 +45,30 @@
             </div>
         </div>
     
+        {% if user.is_authenticated %}
+        <!-- Se o usuário estiver autenticado, mostre a mensagem de boas-vindas e o botão de logout -->
         <div class="horizontal-menu">
             <input type="text" class="search-bar" placeholder="Search Articles..." />
             <input class="button-search" type="button" value="">
-            
-            {% if user.is_authenticated %}
-                <div class="user-info">
-                    Bem-vindo, {{ user.name }}! <!-- ou qualquer outro campo do utilizador que deseje mostrar -->
-                </div>
-            {% else %}
-                <!-- Se o utilizador não estiver autenticado, mostre os botões Login e Register -->
+        </div>  
+        <div class="user-info">
+            Welcome, {{ user.name }}! <!-- ou qualquer outro campo do usuário que deseje mostrar -->
+        </div>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Logout">
+        </form>
+    
+        {% else %}
+            <!-- Se o usuário não estiver autenticado, mostre os botões Login e Register -->
+            <div class="horizontal-menu">
+                <input type="text" class="search-bar" placeholder="Search Articles..." />
+                <input class="button-search" type="button" value="">
+                
                 <li><a href="{% url 'user_login' %}" target="_self">Login</a></li>
                 <li><a href="{% url 'register' %}" target="_self">Register</a></li>
-            {% endif %}
-        </div>
+            </div>
+        {% endif %}
     
     </div>
 

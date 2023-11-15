@@ -99,13 +99,13 @@ h3 {
 
 /* Search Bar Style */
 .horizontal-menu {
-    background: linear-gradient(to bottom, darkblue, darkblue); /* Soft white gradient */
+    background: linear-gradient(to bottom, darkblue, darkblue);
     padding: 15px;
     align-items: center;
     display: flex;
     width: auto;
     background-color: darkblue;
-    justify-content: center;
+    justify-content: space-between; /* Updated */
     list-style: none;
 }
 
@@ -132,15 +132,16 @@ h3 {
 }
 
 .search-bar {
-    padding: 8px; /* Ajuste o padding conforme necessário */
+    padding: 8px;
     border: none;
     border-radius: 5px;
-    font-size: 14px; /* Ajuste o tamanho da fonte conforme necessário */
-    margin: 0 auto; /* Define as margens automáticas para centralizar horizontalmente */
-    width: 20%; /* Ajuste a largura conforme necessário */
+    font-size: 14px;
+    margin: 0 auto;
+    width: 20%;
     background: linear-gradient(to bottom, lightgray, lightgray);
-    margin-left: 350px;
+    margin-left: 50px; /* Adjust this value as needed */
 }
+
 
 ul{
     list-style-type: none;
@@ -157,8 +158,11 @@ ul{
     background-repeat: no-repeat;
     background-position: center;
     background-color: darkblue;
-    margin-right: 440px;
+    margin-right: 20px; /* Adjust this value as needed */
+    display: inline-flex;
 }
+
+
 
 .logo-body{
     padding-top: 200px;

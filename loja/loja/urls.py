@@ -18,11 +18,13 @@ from django.contrib import admin
 from django.urls import path
 from vaitudoabaixo import views
 from django.contrib.auth.views import LoginView
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     #path('', views.login_view, name='login.html'),
     path('', views.user_login, name='user_login'),
+    path('logout/', auth_views.LogoutView.as_view(next_page = 'user_login'), name='logout'),
     path('home/', views.index, name='index'),
     path('home/list_articles/', views.list_articles, name='crud_items/list_articles.html'),
     path('home/add_articles/', views.add_article, name='crud_items/add_article.html'),
