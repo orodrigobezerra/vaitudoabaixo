@@ -120,7 +120,7 @@ STATIC_URL = '/static/'
 
 # Configuração da URL de login
 
-LOGIN_URL = 'login_view'
+LOGIN_URL = 'user_login'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -132,3 +132,4 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
+AUTH_USER_MODEL = 'vaitudoabaixo.myUser'

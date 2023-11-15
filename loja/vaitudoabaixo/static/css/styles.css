@@ -157,7 +157,7 @@ ul{
     background-repeat: no-repeat;
     background-position: center;
     background-color: darkblue;
-    margin-right: 480px;
+    margin-right: 440px;
 }
 
 .logo-body{
@@ -209,3 +209,14 @@ ul{
     color: darkblue;
     font-family: 'Arial', sans-serif; 
   }
+
+  .user-info {
+    color: white;
+    font-family: 'Arial', sans-serif;
+    font-size: large;
+    vertical-align: middle;
+    display: inline-flex;
+    justify-content: flex-end;
+    padding-right: 40px;
+    white-space: nowrap; /* Evita que o texto quebre em várias linhas */
+}

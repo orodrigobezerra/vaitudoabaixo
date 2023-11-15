@@ -29,12 +29,10 @@
                     <br/>
                     <div>
                         <nav class="vertical-menu">
-                            <h3>Users</h3>
+                            <h3>Staff</h3>
                             <ul>
-                                <li><a href="../home/list_users" target="_self">Users List</a></li>
+                                <li><a href="" target="_self">Login</a></li>
                                 <li><a href="../home/regist_user" target="_self">Register User</a></li>
-                                <li><a href="../home/update_user" target="_self">Update User</a></li>
-                                <li><a href="../home/delete_user" target="_self">Delete User</a></li>
                             </ul>
                             <br/>
                         </nav>
@@ -57,18 +55,17 @@
         <div class="div-content2">
             <h1>Login</h1>
             {% if error_message %}
-                <h2>{{ error_message }}</h2>
+                <p style="color: red;">{{ error_message }}</p>
             {% endif %}
-            <form method="post" action="{% url 'login.html' %}">
+            <form method="post" action="{% url 'user_login' %}">
                 {% csrf_token %}
-                <label for="name">Username:</label>
-                <input type="name" name="name" maxlength="100" size="30" required>
+                <label for="email">Email:</label>
+                <input type="email" name="email" maxlength="100" size="30" required>
                 <br/><br/>
-            
+
                 <label for="password">Password:</label>
                 <input type="password" name="password" maxlength="100" size="30" required>
                 <br/><br/>
-            
                 <input type="submit" value="Login">
             </form>
         </div>

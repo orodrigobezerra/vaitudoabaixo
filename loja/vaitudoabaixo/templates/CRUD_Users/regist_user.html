@@ -64,8 +64,7 @@
                 <h3>Email: {{ email }}</h3>
                 <br/>
             {% else %}
-                <form id="myform" method="post" action="">
-                    {% csrf_token %}
+                <form id="myform" method="post" action="{% url 'crud_users/regist_user.html' %}"> {% csrf_token %}
                     <label for="name">Name:</label>
                     <input type="text" name="name" maxlength="100" size="60" required>
                     <br/><br/>

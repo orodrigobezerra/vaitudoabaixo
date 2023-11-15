@@ -1,23 +1,22 @@
 from django.shortcuts import render, redirect
-from django.contrib import messages
-from .models import Articles, Users
-from django.contrib.auth import authenticate, login as auth_login
-from django.contrib.auth.hashers import make_password
+from .models import Articles, myUser, MyUserManager
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 import logging
 
 logger = logging.getLogger(__name__)
 
-
+@login_required(login_url='user_login')
 def index(request):
 	return render(request,'index.html')
 
-def user_login(request):
-	return render(request,'login.html')
-
+@login_required(login_url='user_login')
 def list_articles(request):
     articles = Articles.objects.all()
     return render(request, 'crud_items/list_articles.html', {'articles': articles})
 
+@login_required(login_url='user_login')
 def add_article(request):
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -48,6 +47,7 @@ def add_article(request):
 
     return render(request, 'crud_items/add_article.html')
 
+@login_required(login_url='user_login')
 def search_article(request):
     if request.method == 'POST':
         name = request.POST.get('search_name')  # Obtém o nome para pesquisar
@@ -57,7 +57,7 @@ def search_article(request):
 
     return render(request, 'crud_items/search_article.html')
 
-
+@login_required(login_url='user_login')
 def update_article(request):
     if request.method == 'POST':
         article_id = request.POST.get('id')
@@ -89,7 +89,8 @@ def update_article(request):
         })
 
     return render(request, 'crud_items/update_article.html')
-    
+
+@login_required(login_url='user_login')    
 def delete_article(request):
     if request.method == 'POST':
         article_id = request.POST.get('id')
@@ -104,47 +105,47 @@ def delete_article(request):
     
     return render(request, 'crud_items/delete_article.html')
 
+@login_required(login_url='user_login')
 def list_users(request):
-    users = Users.objects.all()
+    users = myUser.objects.all()
     return render(request, 'crud_users/list_users.html', {'users': users})
 
 def regist_user(request):
-     if request.method == 'POST':
+    if request.method == 'POST':
         name = request.POST.get('name')
         lastname = request.POST.get('lastname')
         email = request.POST.get('email')
         password = request.POST.get('password')
 
-        # Create a new User instance
-        user = Users(name=name, lastname=lastname, email=email)
-        
-        # Set the password using set_password method
-        user.password = make_password(password)
-        
-        # Save the user to the database
-        user.save()
+        if myUser.objects.filter(email=email).exists():
+            return render(request, 'crud_users/regist_user.html', {'error_message': 'User with this email already exists'})
 
-        return redirect('login_view')
-     else:
-         return render(request, 'crud_users/regist_user.html')  # Replace 'login' with the actual name or URL of your login page
+        # Use o método create_user fornecido pelo seu MyUserManager
+        user = myUser.objects.create_user(email=email, password=password, name=name, lastname=lastname)
 
+        return redirect('user_login')
+    else:
+        return render(request, 'crud_users/regist_user.html')
+
+@login_required(login_url='user_login')
 def update_user(request):
     if request.method == 'POST':
-        user_id = request.POST.get('id')
         new_name = request.POST.get('new_name')
         new_lastname = request.POST.get('new_lastname')
         new_email = request.POST.get('new_email')
+        new_password = request.POST.get('new_password')  # Corrigido o nome do campo
 
-        user = Users.objects.get(id=user_id)
+        # Obtém o usuário usando o modelo myUser
+        user = myUser.objects.get(email=new_email)
+
         user.name = new_name
         user.lastname = new_lastname
         user.email = new_email
-
+        user.set_password(new_password)  # Use set_password para criptografar a senha corretamente
 
         user.save()
 
         return render(request, 'crud_users/update_user.html', {
-            'user_id': user_id,
             'new_name': new_name,
             'new_lastname': new_lastname,
             'new_email': new_email,
@@ -152,27 +153,51 @@ def update_user(request):
 
     return render(request, 'crud_users/update_user.html')
 
+@login_required(login_url='user_login')
 def delete_user(request):
     if request.method == 'POST':
-        user_id = request.POST.get('id')
+        email = request.POST.get('email')  # Alterado para 'email'
 
-        # Verifica se o artigo existe
         try:
-            user = Users.objects.get(id=user_id)
+            # Obtém o usuário usando o modelo myUser
+            user = myUser.objects.get(email=email)
             user_name = user.name
             user.delete()
             return render(request, 'crud_users/delete_user.html', {'user_name': user_name})
-        except Users.DoesNotExist:
+        except myUser.DoesNotExist:  # Alterado para 'myUser'
             return render(request, 'crud_users/delete_user.html', {'not_found': True})
 
     return render(request, 'crud_users/delete_user.html')
 
-def login_view(request):
+def user_login(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        logger.debug(f'Attempting login with email: {email} and password: {password}')
+        user = authenticate(request, email=email, password=password)
+        if user is not None:
+            logger.info(f'Successful login for user: {user.email}')
+            login(request, user)
+            return redirect('index')  # Redireciona para a URL nomeada 'index'
+        else:
+            logger.warning(f'Failed login attempt for email: {email}, password: {password}')
+            return render(request, 'login.html', {'error_message': 'Invalid credentials. Try again.'})
+    else:
+        return render(request, 'login.html')
+
+def export_users(request):
+    # Para usuários do seu modelo myUser
+    custom_users = myUser.objects.all()
+    custom_users_data = [f"Email: {user.email}, Password: {user.password}" for user in custom_users]
+
+    return HttpResponse("\n".join(custom_users_data), content_type="text/plain")
+
+""" def login_view(request):
     if request.method == 'POST':
         # Lógica de autenticação aqui
         name = request.POST.get('name')
         password = request.POST.get('password')
-        logger.debug(f'Attempting login for email: {name}')
+        logger.debug(f'Attempting login for name: {name}')
         
         user = authenticate(request, name=name, password=password)
 
@@ -180,9 +205,9 @@ def login_view(request):
             auth_login(request, user)
             messages.success(request, 'Login successful.')
             logger.info('Login successful')
-            return redirect('home')
+            return redirect('index')
         else:
             messages.error(request, 'Invalid credentials. Try again.')
             logger.error('Invalid credentials')
 
-    return render(request, 'login.html')
+    return redirect('index') """
