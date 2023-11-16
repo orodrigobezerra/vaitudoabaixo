@@ -239,8 +239,8 @@ ul{
 }
 
 
-.export-button {
-    display: flex;
+.export-button-csv {
+    display: inline-flex;
     padding: 10px 20px;
     background-color: #4CAF50; /* Cor de fundo do botão */
     color: white; /* Cor do texto do botão */
@@ -250,6 +250,22 @@ ul{
     margin-left: 1050px;
 }
 
-.export-button i {
+.export-button-csv i {
     margin-right: 5px; /* Espaçamento à direita entre o ícone e o texto */
 }
+
+.export-button-pdf {
+    display: inline-flex;
+    padding: 10px 20px;
+    background-color: #e44d26;
+    color: white; /* Cor do texto do botão */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 950px;
+}
+
+.export-button-pdf i {
+    margin-right: 5px; /* Espaçamento à direita entre o ícone e o texto */
+}
+

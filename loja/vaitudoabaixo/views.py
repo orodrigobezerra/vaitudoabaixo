@@ -2,10 +2,16 @@ from django.shortcuts import render, redirect
 from .models import Articles, User
 from django.contrib.auth import authenticate, login as auth_login, get_user_model
 from django.contrib.auth.decorators import login_required
-from django.http import StreamingHttpResponse
+from django.http import StreamingHttpResponse, HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import get_user_model
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+from django.core.files.storage import default_storage
+from django.template.loader import render_to_string
+from io import BytesIO
+import requests
 
 import logging, csv
 
@@ -217,4 +223,53 @@ def export_articles(request):
 
     response = StreamingHttpResponse(generate_csv(), content_type="text/csv")
     response['Content-Disposition'] = 'attachment; filename="articles.csv"'
+    return response
+
+@login_required(login_url='user_login')
+def export_articles_pdf(request):
+    from reportlab.lib import colors
+    from reportlab.lib.pagesizes import letter, inch
+    from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Image
+
+    # Obtenha os dados necessários para o PDF (substitua isso com a lógica adequada)
+    articles = Articles.objects.all()
+
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="articles.pdf"'
+
+    # Crie um objeto PDF
+    pdf = SimpleDocTemplate(response, pagesize=letter)
+    elements = []
+
+    # Adicione a tabela de artigos ao PDF
+    data = [['Id', 'Name', 'Color', 'Instrument', 'Qty Stock', 'Price', 'Img']]
+    for article in articles:
+        # Verifique se a imagem é uma URL válida
+        try:
+            image = Image(article.image, width=50, height=50)
+        except Exception as e:
+            image = None
+
+        data.append([article.id, article.name, article.color, article.instrument,
+                     article.qty_stock, article.price, image])
+
+    # Estilo da tabela
+    style = TableStyle([('BACKGROUND', (0, 0), (-1, 0), colors.grey),
+                        ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+                        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+                        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+                        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+                        ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+                        ('GRID', (0, 0), (-1, -1), 1, colors.grey)])
+
+    # Crie a tabela e aplique o estilo
+    table = Table(data)
+    table.setStyle(style)
+
+    # Adicione a tabela aos elementos do PDF
+    elements.append(table)
+
+    # Construa o PDF
+    pdf.build(elements)
+
     return response

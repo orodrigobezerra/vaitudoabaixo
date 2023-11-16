@@ -25,7 +25,7 @@
                         <h3>Users</h3>
                         <ul>
                             <li><a href="../list_users" target="_self">Users List</a></li>
-                            <li><a href="" target="_self">Register User</a></li>
+                            <li><a href="../regist_user" target="_self">Register User</a></li>
                             <li><a href="../update_user" target="_self">Update User</a></li>
                             <li><a href="../delete_user" target="_self">Delete User</a></li>
                         </ul>
@@ -34,7 +34,7 @@
                     <h3>Articles</h3>
                     <nav class="vertical-menu">
                         <ul>
-                            <li><a href="../list_articles" target="_self">Articles List</a></li>
+                            <li><a href="" target="_self">Articles List</a></li>
                             <li><a href="../add_articles" target="_self">Add Article</a></li>
                             <li><a href="../search_articles" target="_self">Search Article</a></li>
                             <li><a href="../update_articles" target="_self">Update Article</a></li>
@@ -80,9 +80,16 @@
         <h1 class="titles">Articles List</h1>
             <!-- Add the export button here -->
         
+        <form method="post" action="{% url 'export_articles_pdf' %}">
+            {% csrf_token %}
+            <button class="export-button-pdf" type="submit">
+                <i class="fas fa-file-pdf"></i> 
+            </button>
+        </form>
+        
         <form method="post" action="{% url 'export_articles' %}">
             {% csrf_token %}
-            <button class="export-button" type="submit">
+            <button class="export-button-csv" type="submit">
                 <i class="fas fa-file-excel"></i>
             </button>
         </form>

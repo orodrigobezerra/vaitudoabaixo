@@ -37,4 +37,5 @@ urlpatterns = [
     path('home/delete_user/', views.delete_user, name='delete_user'),
     path('export/users/', views.export_users, name='export_users'),
     path('export/articles/', views.export_articles, name='export_articles'),
+    path('export/articles_pdf/', views.export_articles_pdf, name='export_articles_pdf'),
 ]
