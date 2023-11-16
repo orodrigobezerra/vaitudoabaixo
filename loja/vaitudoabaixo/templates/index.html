@@ -48,8 +48,11 @@
         {% if user.is_authenticated %}
             <!-- Se o usuário estiver autenticado, mostre a mensagem de boas-vindas e o botão de logout -->
             <div class="horizontal-menu">
-                <input type="text" class="search-bar" placeholder="Search Articles..." />
-                <input class="button-search" type="button" value="">
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="text" name="search_name" placeholder="Search by name">
+                    <input type="submit" value="Search">
+                </form>
              
                 <div class="user-info">
                     Welcome, {{ user.username }}! <!-- ou qualquer outro campo do usuário que deseje mostrar -->
@@ -62,10 +65,7 @@
     
         {% else %}
             <!-- Se o usuário não estiver autenticado, mostre os botões Login e Register -->
-            <div class="horizontal-menu">
-                <input type="text" class="search-bar" placeholder="Search Articles..." />
-                <input class="button-search" type="button" value="">
-                
+            <div class="horizontal-menu">                
                 <li><a href="{% url 'user_login' %}" target="_self">Login</a></li>
                 <li><a href="{% url 'register' %}" target="_self">Register</a></li>
             </div>

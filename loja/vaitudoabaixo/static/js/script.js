@@ -10,3 +10,4 @@ function toggleMenu(event) {
         logo.src = "{% static 'images/VaiTudoAbaixo-LOGO2.png' %}";
     }
 }
+
