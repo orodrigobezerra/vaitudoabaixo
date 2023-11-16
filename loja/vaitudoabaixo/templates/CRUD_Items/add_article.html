@@ -84,22 +84,29 @@
                 <h3>Preço: {{ price }}</h3>
                 <br/>
             {% else %}
-                <form id="myform" method="post" action="">
-                    {% csrf_token %}
-                    <input type="text" name="name" maxlength="100" size="60" value="" placeholder="Name">
-                    <br/><br/>
-                    <input type="text" name="color" size="60" value="" placeholder="Color">
-                    <br/><br/>
-                    <input type="text" name="instrument" maxlength="20" size="60" value="" placeholder="Instrument">
-                    <br/><br/>
-                    <input type="text" name="qtystock" maxlength="100" size="60" placeholder="Qty Stock">
-                    <br/><br/>
-                    <input type="text" name="price" maxlength="20" size="60" value="" placeholder="Price">
-                    <br/><br/>
-                    <input type="text" name="image" maxlength="255" size="60" value="" placeholder="Image">
-                    <br/><br/>
-                    <input type="submit" value="Confirm">
-                </form>
+            <form id="myform" method="post" action="">
+                {% csrf_token %}
+                <input type="text" name="name" maxlength="100" size="60" value="" placeholder="Name">
+                <br/><br/>
+                <input type="text" name="color" size="60" value="" placeholder="Color">
+                <br/><br/>
+                <label for="instrument">Instrument:</label>
+                <select id="instrument" name="instrument">
+                    <option value="" disabled selected>Select</option>
+                    <option value="Acustica">Acustica</option>
+                    <option value="Baixo">Baixo</option>
+                    <option value="Eletrica">Eletrica</option>
+                    <!-- Adicione mais opções conforme necessário -->
+                </select>
+                <br/><br/>
+                <input type="text" name="qtystock" maxlength="100" size="60" placeholder="Qty Stock">
+                <br/><br/>
+                <input type="text" name="price" maxlength="20" size="60" value="" placeholder="Price">
+                <br/><br/>
+                <input type="text" name="image" maxlength="255" size="60" value="" placeholder="Image">
+                <br/><br/>
+                <input type="submit" value="Confirm">
+            </form>
             {% endif %}
             <p></p>
             <a href="../" target="_self">Back to Home</a>

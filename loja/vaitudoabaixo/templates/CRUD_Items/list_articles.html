@@ -77,7 +77,7 @@
     <div id="table-articles" class="div-content">
         <h1 class="titles">Articles List</h1>
         <table border="1">
-            <tr>
+            <tr class="table-article-name2">
                 <th>Id</th>
                 <th>Name</th>
                 <th>Color</th>
@@ -91,11 +91,11 @@
             <tr>
                 <td>{{ article.id }}</td>
                 <td class="table-article-name">{{ article.name }}</td>
-                <td>{{ article.color }}</td>
-                <td>{{ article.instrument }}</td>
-                <td>{{ article.qty_stock }}</td>
-                <td>{{ article.price }}</td>
-                <td class="table_img"><img src="{{article.image}}" width='100px'></td>
+                <td class="table-article-name2">{{ article.color }}</td>
+                <td class="table-article-name2">{{ article.instrument }}</td>
+                <td class="table-article-name2">{{ article.qty_stock }}</td>
+                <td class="table-article-name2">{{ article.price }}</td>
+                <td  class="table-article-name2" class="table_img"><img src="{{article.image}}" width='100px'></td>
             </tr>
             {% endfor %}
         </table>

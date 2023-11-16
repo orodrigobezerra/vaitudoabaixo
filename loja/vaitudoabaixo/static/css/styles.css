@@ -205,7 +205,11 @@ ul{
   }
 
   .table-article-name{
-    width: 1%;
+    width: 40%;
+  }
+
+  .table-article-name2{
+    text-align: center;
   }
   
   #table-articles tr:hover {background-color: #ddd;}
@@ -216,7 +220,6 @@ ul{
     text-align: left;
     background-color: darkblue;
     color: white;
-    width: 70%;
   }
 
   .titles {
