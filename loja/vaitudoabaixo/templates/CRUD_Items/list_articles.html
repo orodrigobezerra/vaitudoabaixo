@@ -80,20 +80,21 @@
         <h1 class="titles">Articles List</h1>
             <!-- Add the export button here -->
         
-        <form method="post" action="{% url 'export_articles_pdf' %}">
-            {% csrf_token %}
-            <button class="export-button-pdf" type="submit">
-                <i class="fas fa-file-pdf"></i> 
-            </button>
-        </form>
-        
-        <form method="post" action="{% url 'export_articles' %}">
-            {% csrf_token %}
-            <button class="export-button-csv" type="submit">
-                <i class="fas fa-file-excel"></i>
-            </button>
-        </form>
-
+        <div class="button-container">
+            <form method="post" action="{% url 'export_articles_pdf' %}">
+                {% csrf_token %}
+                <button class="export-button-pdf" type="submit">
+                    <i class="fas fa-file-pdf"></i> 
+                </button>
+            </form>
+            
+            <form method="post" action="{% url 'export_articles' %}">
+                {% csrf_token %}
+                <button class="export-button-csv" type="submit">
+                    <i class="fas fa-file-excel"></i>
+                </button>
+            </form>
+        </div>
         <br>
         <table border="1">
             <tr class="table-article-name2">

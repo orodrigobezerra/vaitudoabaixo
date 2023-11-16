@@ -247,7 +247,7 @@ ul{
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-left: 1050px;
+
 }
 
 .export-button-csv i {
@@ -262,10 +262,14 @@ ul{
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-left: 950px;
+    margin-left: 990px;
+    margin-right: 10px;
 }
 
 .export-button-pdf i {
     margin-right: 5px; /* Espaçamento à direita entre o ícone e o texto */
 }
 
+.button-container {
+    display: flex;
+}
