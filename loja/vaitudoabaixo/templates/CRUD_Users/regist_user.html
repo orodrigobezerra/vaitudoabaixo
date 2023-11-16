@@ -12,6 +12,7 @@
     <title>Add Users</title>
 </head>
 <body>
+    {% if user.is_authenticated %}
     <div class="main">
         <div class="container">
             <div class="vert-menu" onmouseover="toggleMenu(event)" onmouseout="toggleMenu(event)">
@@ -45,23 +46,44 @@
             </div>
         </div>
     
-        {% if user.is_authenticated %}
-            <!-- Se o usuário estiver autenticado, mostre a mensagem de boas-vindas e o botão de logout -->
-            <div class="horizontal-menu">
-                <input type="text" class="search-bar" placeholder="Search Articles..." />
-                <input class="button-search" type="button" value="">
-                
-                <div class="user-info">
-                    Welcome, {{ user.username }}! <!-- ou qualquer outro campo do usuário que deseje mostrar -->
-                </div>
-                <form action="{% url 'logout' %}" method="post">
-                    {% csrf_token %}
-                    <input type="submit" value="Logout">
-                </form>
-            </div> 
+        <!-- Se o usuário estiver autenticado, mostre a mensagem de boas-vindas e o botão de logout -->
+        <div class="horizontal-menu">
+            <input type="text" class="search-bar" placeholder="Search Articles..." />
+            <input class="button-search" type="button" value="">
+            
+            <div class="user-info">
+                Welcome, {{ user.username }}! <!-- ou qualquer outro campo do usuário que deseje mostrar -->
+            </div>
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Logout">
+            </form>
+        </div> 
     
-        {% else %}
-            <!-- Se o usuário não estiver autenticado, mostre os botões Login e Register -->
+    {% else %}
+        <!-- Se o usuário não estiver autenticado, mostre os botões Login e Register -->
+        <div class="main">
+            <div class="container">
+                <div class="vert-menu" onmouseover="toggleMenu(event)" onmouseout="toggleMenu(event)">
+                    <img class="logo-header" src="{% static 'images/VaiTudoAbaixo-LOGO-WHITE.png' %}" alt="Logo" width="100%">
+                    <div id="menu" style="display: none;">
+                        <h1>BackEnd</h1>
+                        <br/>
+                        <div>
+                            <nav class="vertical-menu">
+                                <h3>Staff</h3>
+                                <ul>
+                                    <!-- Adicione esses links -->
+                                    <li><a href="{% url 'user_login' %}" target="_self">Login</a></li>
+                                    <li><a href="{% url 'regist_user' %}" target="_self">Register</a></li>
+                                </ul>
+                                <br/>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
             <div class="horizontal-menu">
                 <div class="search-container">
                 </div>
@@ -70,7 +92,8 @@
                     <li><a href="../home/regist_user" target="_self">Register</a></li>
                 </div>
             </div>
-        {% endif %}
+        </div>
+    {% endif %}
     
     </div>
 

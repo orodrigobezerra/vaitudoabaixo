@@ -79,10 +79,16 @@
         <!-- Use o formulário de exclusão do Django -->
         <form method="post" action="{% url 'delete_user' %}">
             {% csrf_token %}
-            <p>Enter the username of the user you want to delete:</p>
-            <input type="text" name="username" maxlength="20" size="20" placeholder="Username">
-            <br/><br/>
-            <input type="submit" value="Delete">
+            {% if user.is_superuser %}
+                <!-- Se o usuário logado é um superusuário, permitir a exclusão de qualquer usuário -->
+                <p>Enter the username of the user you want to delete:</p>
+                <input type="text" name="username" maxlength="20" size="20" placeholder="Username">
+                <br/><br/>
+                <input type="submit" value="Delete">
+            {% else %}
+                <!-- Caso contrário, não exibir o botão de exclusão -->
+                <p>You do not have permission to delete users.</p>
+            {% endif %}
         </form>
         <p></p>
         <a href=".." target="_self">Back to home</a>
