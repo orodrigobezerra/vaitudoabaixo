@@ -48,7 +48,7 @@
         {% if user.is_authenticated %}
             <!-- Se o usuário estiver autenticado, mostre a mensagem de boas-vindas e o botão de logout -->
             <div class="horizontal-menu">
-                <form method="post">
+                <form method="post" action="{% url 'search_articles' %}">
                     {% csrf_token %}
                     <input type="text" name="search_name" placeholder="Search by name">
                     <input type="submit" value="Search">

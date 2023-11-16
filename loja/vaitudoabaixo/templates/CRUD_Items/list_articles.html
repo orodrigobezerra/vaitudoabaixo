@@ -47,30 +47,30 @@
     </div>
 
     {% if user.is_authenticated %}
-        <!-- Se o usuário estiver autenticado, mostre a mensagem de boas-vindas e o botão de logout -->
-        <div class="horizontal-menu">
-            <input type="text" class="search-bar" placeholder="Search Articles..." />
-            <input class="button-search" type="button" value="">
-            
-            <div class="user-info">
-                Welcome, {{ user.username }}! <!-- ou qualquer outro campo do usuário que deseje mostrar -->
+            <!-- Se o usuário estiver autenticado, mostre a mensagem de boas-vindas e o botão de logout -->
+            <div class="horizontal-menu">
+                <form method="post" action="{% url 'search_articles' %}">
+                    {% csrf_token %}
+                    <input type="text" name="search_name" placeholder="Search by name">
+                    <input type="submit" value="Search">
+                </form>
+             
+                <div class="user-info">
+                    Welcome, {{ user.username }}! <!-- ou qualquer outro campo do usuário que deseje mostrar -->
+                </div>
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Logout">
+                </form>
+            </div> 
+    
+        {% else %}
+            <!-- Se o usuário não estiver autenticado, mostre os botões Login e Register -->
+            <div class="horizontal-menu">                
+                <li><a href="{% url 'user_login' %}" target="_self">Login</a></li>
+                <li><a href="{% url 'register' %}" target="_self">Register</a></li>
             </div>
-            <form action="{% url 'logout' %}" method="post">
-                {% csrf_token %}
-                <input type="submit" value="Logout">
-            </form>
-        </div> 
-
-    {% else %}
-        <!-- Se o usuário não estiver autenticado, mostre os botões Login e Register -->
-        <div class="horizontal-menu">
-            <input type="text" class="search-bar" placeholder="Search Articles..." />
-            <input class="button-search" type="button" value="">
-            
-            <li><a href="{% url 'user_login' %}" target="_self">Login</a></li>
-            <li><a href="{% url 'regist_user' %}" target="_self">Register</a></li>
-        </div>
-    {% endif %}
+        {% endif %}
 
 </div>
 
@@ -115,7 +115,7 @@
                 <td class="table-article-name2">{{ article.instrument }}</td>
                 <td class="table-article-name2">{{ article.qty_stock }}</td>
                 <td class="table-article-name2">{{ article.price }}</td>
-                <td  class="table-article-name2" class="table_img"><img src="{{article.image}}" width='100px'></td>
+                <td class="table-article-name2" class="table_img"><img src="{{article.image}}" width='100px'></td>
             </tr>
             {% endfor %}
         </table>

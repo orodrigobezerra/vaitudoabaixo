@@ -20,7 +20,7 @@
                             <h3>Users</h3>
                             <ul>
                                 <li><a href="../list_users" target="_self">Users List</a></li>
-                                <li><a href="" target="_self">Register User</a></li>
+                                <li><a href="../regist_user" target="_self">Register User</a></li>
                                 <li><a href="../update_user" target="_self">Update User</a></li>
                                 <li><a href="../delete_user" target="_self">Delete User</a></li>
                             </ul>
@@ -31,7 +31,7 @@
                             <ul>
                                 <li><a href="../list_articles" target="_self">Articles List</a></li>
                                 <li><a href="../add_articles" target="_self">Add Article</a></li>
-                                <li><a href="../search_articles" target="_self">Search Article</a></li>
+                                <li><a href="" target="_self">Search Article</a></li>
                                 <li><a href="../update_articles" target="_self">Update Article</a></li>
                                 <li><a href="../delete_articles" target="_self">Delete Article</a></li>
                             </ul>
@@ -44,9 +44,12 @@
         {% if user.is_authenticated %}
             <!-- Se o usuário estiver autenticado, mostre a mensagem de boas-vindas e o botão de logout -->
             <div class="horizontal-menu">
-                <input type="text" class="search-bar" placeholder="Search Articles..." />
-                <input class="button-search" type="button" value="">
-                
+                <form method="post" action="{% url 'search_articles' %}">
+                    {% csrf_token %}
+                    <input type="text" name="search_name" placeholder="Search by name">
+                    <input type="submit" value="Search">
+                </form>
+             
                 <div class="user-info">
                     Welcome, {{ user.username }}! <!-- ou qualquer outro campo do usuário que deseje mostrar -->
                 </div>
@@ -58,21 +61,20 @@
     
         {% else %}
             <!-- Se o usuário não estiver autenticado, mostre os botões Login e Register -->
-            <div class="horizontal-menu">
-                <input type="text" class="search-bar" placeholder="Search Articles..." />
-                <input class="button-search" type="button" value="">
-                
+            <div class="horizontal-menu">                
                 <li><a href="{% url 'user_login' %}" target="_self">Login</a></li>
-                <li><a href="{% url 'regist_user' %}" target="_self">Register</a></li>
+                <li><a href="{% url 'register' %}" target="_self">Register</a></li>
             </div>
         {% endif %}
     
     </div>
 
-    <div class="div-content">
+    <div id="table-articles" class="div-content">
         <h1 class="titles">Search Results for '{{ search_name }}'</h1>
+        
         <table border="1">
-            <tr>
+            <tr class="table-article-name2">
+                <th>Id</th>
                 <th>Name</th>
                 <th>Color</th>
                 <th>Instrument</th>
@@ -80,14 +82,16 @@
                 <th>Price</th>
                 <th>Image</th>
             </tr>
+            
             {% for article in articles %}
             <tr>
-                <td>{{ article.name }}</td>
-                <td>{{ article.color }}</td>
-                <td>{{ article.instrument }}</td>
-                <td>{{ article.qty_stock }}</td>
-                <td>{{ article.price }}</td>
-                <td><img width="100" src="{{article.image}}"></td>
+                <td>{{ article.id }}</td>
+                <td class="table-article-name">{{ article.name }}</td>
+                <td class="table-article-name2">{{ article.color }}</td>
+                <td class="table-article-name2">{{ article.instrument }}</td>
+                <td class="table-article-name2">{{ article.qty_stock }}</td>
+                <td class="table-article-name2">{{ article.price }}</td>
+                <td class="table-article-name2" class="table_img"><img src="{{article.image}}" width='100px'></td>
             </tr>
             {% empty %}
             <tr>
