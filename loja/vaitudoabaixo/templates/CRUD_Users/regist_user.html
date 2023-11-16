@@ -63,11 +63,12 @@
         {% else %}
             <!-- Se o usuário não estiver autenticado, mostre os botões Login e Register -->
             <div class="horizontal-menu">
-                <input type="text" class="search-bar" placeholder="Search Articles..." />
-                <input class="button-search" type="button" value="">
-                
-                <li><a href="{% url 'user_login' %}" target="_self">Login</a></li>
-                <li><a href="{% url 'regist_user' %}" target="_self">Register</a></li>
+                <div class="search-container">
+                </div>
+                <div class="user-links">
+                    <li><a href="" target="_self">Login</a></li>
+                    <li><a href="../home/regist_user" target="_self">Register</a></li>
+                </div>
             </div>
         {% endif %}
     
