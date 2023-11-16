@@ -10,6 +10,10 @@ from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from django.core.files.storage import default_storage
 from django.template.loader import render_to_string
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import letter, A4, landscape
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Image, Paragraph, Spacer
 from io import BytesIO
 import requests
 
@@ -226,44 +230,75 @@ def export_articles(request):
     return response
 
 @login_required(login_url='user_login')
-def export_articles_pdf(request):
-    from reportlab.lib import colors
-    from reportlab.lib.pagesizes import letter, inch
-    from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Image
-
+def export_articles_pdf(request, pagesize=letter, margins=(30, 30, 30, 30)):
     # Obtenha os dados necessários para o PDF (substitua isso com a lógica adequada)
     articles = Articles.objects.all()
 
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename="articles.pdf"'
 
-    # Crie um objeto PDF
-    pdf = SimpleDocTemplate(response, pagesize=letter)
+    # Crie um objeto PDF com orientação retrato (portrait) e margens ajustadas
+    pdf = SimpleDocTemplate(response, pagesize=pagesize, rightMargin=margins[0],
+                            leftMargin=margins[1], topMargin=margins[2], bottomMargin=margins[3])
+
+    # Estilos
+    styles = getSampleStyleSheet()
+    header_style = ParagraphStyle(
+        'Header1',
+        parent=styles['Heading1'],
+        fontName='Helvetica-Bold',
+        fontSize=12,  # Ajuste o tamanho da fonte
+        spaceAfter=6,
+    )
+
     elements = []
 
+    # Adicione o cabeçalho personalizado
+    header_text = "Articles List"
+    header = Paragraph(header_text, header_style)
+    elements.append(header)
+
+    # Adicione uma quebra de linha
+    elements.append(Spacer(1, 20))  # Ajuste o espaço conforme necessário
+
     # Adicione a tabela de artigos ao PDF
-    data = [['Id', 'Name', 'Color', 'Instrument', 'Qty Stock', 'Price', 'Img']]
+    column_widths = [20, 280, 70, 50, 60, 40, 40]
+    data = [['Id', 'Name', 'Color', 'Article', 'Qty Stock', 'Price', 'Img']]
     for article in articles:
         # Verifique se a imagem é uma URL válida
         try:
-            image = Image(article.image, width=50, height=50)
+            image = Image(article.image, width=20, height=20)
         except Exception as e:
             image = None
+        
+        name_paragraph = Paragraph(article.name, styles['Normal'])
+        color_paragraph = Paragraph(article.color, styles['Normal'])
+        instrument_paragraph = Paragraph(str(article.instrument), styles['Normal'])
+        qty_stock_paragraph = Paragraph(str(article.qty_stock), styles['Normal'])
+        price_paragraph = Paragraph(str(article.price), styles['Normal'])
 
-        data.append([article.id, article.name, article.color, article.instrument,
-                     article.qty_stock, article.price, image])
+        # Adicione alinhamento ao centro para as células com texto
+        color_paragraph.alignment = 1
+        instrument_paragraph.alignment = 1
+        qty_stock_paragraph.alignment = 2
+        price_paragraph.alignment = 1
+
+        data.append([article.id, name_paragraph, color_paragraph, instrument_paragraph,
+                 qty_stock_paragraph, price_paragraph, image])
 
     # Estilo da tabela
-    style = TableStyle([('BACKGROUND', (0, 0), (-1, 0), colors.grey),
-                        ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
-                        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-                        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-                        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
-                        ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
-                        ('GRID', (0, 0), (-1, -1), 1, colors.grey)])
+    style = TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), colors.darkblue),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
+        ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+        ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+        ('BACKGROUND', (0, 1), (-1, -1), colors.whitesmoke),
+        ('GRID', (0, 0), (-1, -1), 1, colors.grey)])
 
     # Crie a tabela e aplique o estilo
-    table = Table(data)
+    table = Table(data, colWidths=column_widths)
     table.setStyle(style)
 
     # Adicione a tabela aos elementos do PDF
