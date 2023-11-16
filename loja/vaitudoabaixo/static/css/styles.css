@@ -237,3 +237,19 @@ ul{
     margin-left: 25%;
     white-space: nowrap; /* Evita que o texto quebre em várias linhas */
 }
+
+
+.export-button {
+    display: flex;
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Cor de fundo do botão */
+    color: white; /* Cor do texto do botão */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 1050px;
+}
+
+.export-button i {
+    margin-right: 5px; /* Espaçamento à direita entre o ícone e o texto */
+}

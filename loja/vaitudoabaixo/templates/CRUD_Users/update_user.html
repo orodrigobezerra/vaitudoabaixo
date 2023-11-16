@@ -24,8 +24,8 @@
                             <h3>Users</h3>
                             <ul>
                                 <li><a href="../list_users" target="_self">Users List</a></li>
-                                <li><a href="" target="_self">Register User</a></li>
-                                <li><a href="../update_user" target="_self">Update User</a></li>
+                                <li><a href="../regist_user" target="_self">Register User</a></li>
+                                <li><a href="" target="_self">Update User</a></li>
                                 <li><a href="../delete_user" target="_self">Delete User</a></li>
                             </ul>
                             <br/>
@@ -82,7 +82,7 @@
             <form method="post" action="{% url 'update_user' %}">
                 {% csrf_token %}
                 <p>Update your user:</p>
-                <input type="text" name="username" maxlength="20" size="20" value="{{ user.username }}" placeholder="ID">
+                <input type="text" name="username" maxlength="20" size="20" value="{{ user.username }}" placeholder="Username" readonly>
                 <br/><br/>
                 <hr>
                 <p>Insert new data</p>
