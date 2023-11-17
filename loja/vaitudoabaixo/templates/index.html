@@ -9,6 +9,8 @@
     <meta name="author" content="" />
     <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css">
     <script src="https://kit.fontawesome.com/c035f4c5b7.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <title>Vai Tudo Abaixo</title>
 </head>
 <body>
@@ -53,9 +55,9 @@
                     <input type="text" name="search_name" placeholder="Search by name">
                     <input type="submit" value="Search">
                 </form>
-             
+
                 <div class="user-info">
-                    Welcome, {{ user.username }}! <!-- ou qualquer outro campo do usuário que deseje mostrar -->
+                    Welcome, <span class="username">{{ user.username }}</span>
                 </div>
                 <form action="{% url 'logout' %}" method="post">
                     {% csrf_token %}
@@ -80,3 +82,9 @@
     <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>
+
+
+
+    
+    
+    

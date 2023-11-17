@@ -216,6 +216,14 @@ margin-left: 65%;
 white-space: nowrap; /* Evita que o texto quebre em várias linhas */
 }
 
+.user-info .username {
+    color: yellow;  /* ou a cor desejada para o username */
+}
+
+.user-info .username::before {
+    content: "\00a0";  /* Adiciona um espaço não quebrável após o username */
+}
+
 .search-bar {
 align-items: center;
 }
