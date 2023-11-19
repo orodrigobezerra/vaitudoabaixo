@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -9,15 +8,13 @@
     <meta name="author" content="" />
     <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css">
     <script src="https://kit.fontawesome.com/c035f4c5b7.js" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <title>Vai Tudo Abaixo</title>
 </head>
 <body>
     <div class="main">
         <div class="container">
             <div class="vert-menu" onmouseover="toggleMenu(event)" onmouseout="toggleMenu(event)">
-                <img class="logo-header" src="{% static 'images/VaiTudoAbaixo-LOGO-WHITE.png' %}" alt="Logo" width="100%">
+                <img class="logo-header" src="{% static 'images/VaiTudoAbaixo-LOGO-white.png' %}" alt="Logo" width="100%">
                 <div id="menu" style="display: none;">
                     <h1>BackEnd</h1>
                     <br/>
@@ -50,7 +47,7 @@
         {% if user.is_authenticated %}
             <!-- Se o usuário estiver autenticado, mostre a mensagem de boas-vindas e o botão de logout -->
             <div class="horizontal-menu">
-                <form method="post" action="{% url 'search_articles' %}">
+                <form class="search-bar" method="post" action="{% url 'search_articles' %}">
                     {% csrf_token %}
                     <input type="text" name="search_name" placeholder="Search by name">
                     <input type="submit" value="Search">
@@ -59,6 +56,7 @@
                 <div class="user-info">
                     Welcome, <span class="username">{{ user.username }}</span>
                 </div>
+                
                 <form action="{% url 'logout' %}" method="post">
                     {% csrf_token %}
                     <input type="submit" value="Logout">
@@ -74,17 +72,9 @@
         {% endif %}
     
     </div>
-
     <div>
         <img class="logo-body" src="{% static 'images/VaiTudoAbaixo-LOGO2.png' %}" alt="Logo" width="40%">
     </div>
-
     <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>
-
-
-
-    
-    
-    
