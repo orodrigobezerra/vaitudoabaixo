@@ -126,7 +126,6 @@ def list_users(request):
 
     return render(request, 'crud_users/list_users.html', {'users': users})
 
-
 def regist_user(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)

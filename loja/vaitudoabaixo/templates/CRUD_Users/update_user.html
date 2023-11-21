@@ -76,6 +76,18 @@
         <h1 class="titles">Update User</h1>
         <form method="post" action="{% url 'update_user' %}">
             {% csrf_token %}
+            {% if user.is_superuser %}
+            <p>Update a user:</p>
+            <input type="text" name="username" maxlength="20" size="20" value="{{ user.username }}" placeholder="Username">
+            <br/><br/>
+            <hr>
+            <p>Insert new data</p>
+            <input type="text" name="new_username" maxlength="20" size="20" value="" placeholder="New username">
+            <br/><br/>
+            <input type="password" name="new_password" maxlength="20" size="20" value="" placeholder="New password">
+            <br/><br/>
+            <input type="submit" value="Update">
+            {% else %}
             <p>Update your user:</p>
             <input type="text" name="username" maxlength="20" size="20" value="{{ user.username }}" placeholder="Username" readonly>
             <br/><br/>
@@ -86,6 +98,7 @@
             <input type="password" name="new_password" maxlength="20" size="20" value="" placeholder="New password">
             <br/><br/>
             <input type="submit" value="Update">
+        {% endif %}
         </form>
         <p></p>
         <a href=".." target="_self">Back to home</a>
