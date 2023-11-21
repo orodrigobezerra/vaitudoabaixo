@@ -46,8 +46,10 @@
             <div class="horizontal-menu">
                 <form class="search-bar" method="post" action="{% url 'search_articles' %}">
                     {% csrf_token %}
-                    <input type="text" name="search_name" placeholder="Search by name">
-                    <input type="submit" value="Search">
+                    <div class="search-container">
+                        <input type="text" name="search_name" placeholder="Search by name">
+                        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+                    </div>
                 </form>
     
                 <div class="user-info">
