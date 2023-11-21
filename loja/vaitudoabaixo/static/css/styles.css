@@ -19,6 +19,7 @@ box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
 background-color: darkblue;
 
 }
+
 .vert-menu {
 background: linear-gradient(to bottom, darkblue, darkblue); /* Soft white gradient */
 width: 210px;
@@ -28,7 +29,6 @@ flex-direction:column;
 align-items: flex-start;
 text-align: center;
 padding-right: 50px;
-
 }
 
 .vert-menu img.logo-header {
@@ -200,12 +200,14 @@ transition: all 0.3s ease;
     padding-bottom: 10px;
     padding-top: 10px;
     vertical-align: middle;
+    cursor: pointer;
 }
 
 #articlesSubMenu a {
     padding-bottom: 10px;
     padding-top: 10px;
     vertical-align: middle;
+    cursor: pointer;
 }
 
 h3:hover + #usersSubMenu,
@@ -355,7 +357,6 @@ margin-left: 85%;
 font-size: 18px;
 }
 
-
 .export-button-csv {
 display: inline-flex;
 padding: 10px 20px;
@@ -364,7 +365,6 @@ color: white; /* Cor do texto do botão */
 border: none;
 border-radius: 5px;
 cursor: pointer;
-
 }
 
 .export-button-csv i {
