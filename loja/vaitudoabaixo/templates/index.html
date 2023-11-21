@@ -49,10 +49,14 @@
                     <input type="submit" value="Search">
                 </form>
 
-                <div class="user_links">
-                    <a href="{% url 'user_login' %}" target="_self">Login</a>
-                    <a href="{% url 'regist_user' %}" target="_self">Register</a>
+                <div class="user-info">
+                    Welcome, <span class="username">{{ user.username }}</span>
                 </div>
+                
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Logout">
+                </form>
             </div> 
     
         {% else %}

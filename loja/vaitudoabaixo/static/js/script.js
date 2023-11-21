@@ -11,7 +11,7 @@ function toggleMenu(event) {
   } else if (event.type === "mouseout") {
     menu.style.display = "none";
     logo.src = "/static/images/VaiTudoAbaixo-LOGO-white.png";
-    logo.style.width = "60%";
+    logo.style.width = "50%";
     logo.style.marginTop = "0";
     logo.style.marginBottom = "0";
   }
@@ -27,10 +27,10 @@ function toggleSubMenu(subMenuId) {
     });
 
     // Exibe ou oculta o submenu atual com base no estado atual
-    if (subMenu.style.display === 'block') {
-        subMenu.style.display = 'none';
-    } else {
+    if (subMenu.style.display === 'none') {
         subMenu.style.display = 'block';
+    } else {
+        subMenu.style.display = 'none';
     }
 }
 

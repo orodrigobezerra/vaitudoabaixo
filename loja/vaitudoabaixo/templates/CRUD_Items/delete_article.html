@@ -11,31 +11,27 @@
     <div class="main">
         <div class="container">
             <div class="vert-menu" onmouseover="toggleMenu(event)" onmouseout="toggleMenu(event)">
-                <img class="logo-header" src="{% static 'images/VaiTudoAbaixo-LOGO-WHITE.png' %}" alt="Logo" width="100%">
+                <img class="logo-header" src="{% static 'images/VaiTudoAbaixo-LOGO-white.png' %}" alt="Logo" width="100">
                 <div id="menu" style="display: none;">
                     <h1>BackEnd</h1>
                     <br/>
-                    <div>
-                        <nav class="vertical-menu">
-                            <h3>Users</h3>
-                            <ul>
-                                <li><a href="../list_users" target="_self">Users List</a></li>
-                                <li><a href="../regist_user" target="_self">Register User</a></li>
-                                <li><a href="../update_user" target="_self">Update User</a></li>
-                                <li><a href="../delete_user" target="_self">Delete User</a></li>
-                            </ul>
-                            <br/>
-                        </nav>
-                        <h3>Articles</h3>
-                        <nav class="vertical-menu">
-                            <ul>
-                                <li><a href="../list_articles" target="_self">Articles List</a></li>
-                                <li><a href="../add_articles" target="_self">Add Article</a></li>
-                                <li><a href="../search_articles" target="_self">Search Article</a></li>
-                                <li><a href="../update_articles" target="_self">Update Article</a></li>
-                                <li><a href="../delete_articles" target="_self">Delete Article</a></li>
-                            </ul>
-                        </nav>
+                    <div class="vertical-menu">
+                        <h3 onmouseover="toggleSubMenu('usersSubMenu')">Users</h3>
+                        <ul id="usersSubMenu" class="submenu" style="display: none;">
+                            <li><a href="../list_users" target="_self">Users List</a></li>
+                            <li><a href="../regist_user" target="_self">Register User</a></li>
+                            <li><a href="../update_user" target="_self">Update User</a></li>
+                            <li><a href="../delete_user" target="_self">Delete User</a></li>
+                        </ul>
+                        
+                        <h3 onmouseover="toggleSubMenu('articlesSubMenu')">Articles</h3>
+                        <ul id="articlesSubMenu" class="submenu" style="display: none;">
+                            <li><a href="../list_articles" target="_self">Articles List</a></li>
+                        <li><a href="../add_articles" target="_self">Add Article</a></li>
+                        <li><a href="../search_articles" target="_self">Search Article</a></li>
+                        <li><a href="../update_articles" target="_self">Update Article</a></li>
+                        <li><a href="" target="_self">Delete Article</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -49,7 +45,7 @@
                     <input type="text" name="search_name" placeholder="Search by name">
                     <input type="submit" value="Search">
                 </form>
-
+    
                 <div class="user-info">
                     Welcome, <span class="username">{{ user.username }}</span>
                 </div>
@@ -63,14 +59,15 @@
         {% else %}
             <!-- Se o usuário não estiver autenticado, mostre os botões Login e Register -->
             <div class="horizontal-menu">                
-                <li><a href="{% url 'user_login' %}" target="_self">Login</a></li>
-                <li><a href="{% url 'register' %}" target="_self">Register</a></li>
+                <a href="{% url 'user_login' %}" target="_self">Login</a>
+                <a href="{% url 'regist_user' %}" target="_self">Register</a>
             </div>
         {% endif %}
     
     </div>
 
     <div class="div-content">        
+        <h1 class="titles">Delete Article</h1>
         <p></p>
         <form method="post" action="{% url 'delete_articles' %}">
             {% csrf_token %}

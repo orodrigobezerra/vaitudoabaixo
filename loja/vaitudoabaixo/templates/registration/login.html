@@ -15,25 +15,21 @@
     <div class="main">
         <div class="container">
             <div class="vert-menu" onmouseover="toggleMenu(event)" onmouseout="toggleMenu(event)">
-                <img class="logo-header" src="{% static 'images/VaiTudoAbaixo-LOGO-WHITE.png' %}" alt="Logo" width="100%">
+                <img class="logo-header" src="{% static 'images/VaiTudoAbaixo-LOGO-white.png' %}" alt="Logo" width="100">
                 <div id="menu" style="display: none;">
                     <h1>BackEnd</h1>
                     <br/>
-                    <div>
-                        <nav class="vertical-menu">
-                            <h3>Staff</h3>
-                            <ul>
-                                <!-- Adicione esses links -->
-                                <li><a href="{% url 'user_login' %}" target="_self">Login</a></li>
-                                <li><a href="{% url 'regist_user' %}" target="_self">Register</a></li>
-                            </ul>
-                            <br/>
-                        </nav>
+                    <div class="vertical-menu">
+                        <h3 onmouseover="toggleSubMenu('usersSubMenu')">Staff</h3>
+                        <ul id="usersSubMenu" class="submenu" style="display: none;">
+                            <li><a href="{% url 'user_login' %}" target="_self">Login</a></li>
+                            <li><a href="{% url 'regist_user' %}" target="_self">Register</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-    
+
         <div class="horizontal-menu">
             <div class="user-info2">
                 <li><a href="" target="_self">Login</a></li>
@@ -41,7 +37,8 @@
             </div>
         </div>
     </div>
-    <div class="div-content">
+    
+    <div class="div-content2">
         <div>
             <img class="logo-body2" src="{% static 'images/VaiTudoAbaixo-LOGO2.png' %}" alt="Logo" width="20%">
         </div>

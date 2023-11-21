@@ -21,21 +21,22 @@ background-color: darkblue;
 }
 .vert-menu {
 background: linear-gradient(to bottom, darkblue, darkblue); /* Soft white gradient */
-width: 200px;
+width: 210px;
 font-family: 'Arial', sans-serif; /* Modern font */
 display:flex;
 flex-direction:column;
 align-items: flex-start;
 text-align: center;
-padding: 4px;
 padding-right: 50px;
-padding-left: 30px;
+
 }
 
 .vert-menu img.logo-header {
-width: 60%;
-padding-top: 4px;
-margin-right: 20px;
+width: 50%;
+padding-top: 6px;
+padding-left: 30px;
+align-items: center;
+vertical-align: middle;
 }
 
 .vert-menu h1 {
@@ -43,29 +44,28 @@ color: whitesmoke; /* Dark text color for contrast */
 }
 
 .vertical-menu {
-width: 100%;
-height: auto;
+width: 210px;
 display: flex;
 align-items: flex-start;
 text-align: center;
 flex-direction:row;
 background-color: darkblue;
 position: relative;
-padding-left: 20px;
+padding: 0 20px;
+margin-bottom: 0;
 }
 
 .vertical-menu a {
 color: whitesmoke; /* Dark text color */
 display: block;
-padding-top: 6px ;
 text-decoration: none;
 transition: background-color 0.1s; /* Add smooth transition on hover */
-font-size: 16px; /* Modern font size */
+font-size: 18px; /* Modern font size */
 background-color: darkblue;
 }
 
 .vertical-menu a:hover {
-background-color: #f0f0f0; /* Light grey on hover */
+background-color: lightsalmon; /* Light grey on hover */
 color: darkblue;
 }
 
@@ -78,42 +78,28 @@ color: darkblue;
 h3 {
 color: whitesmoke; /* Dark text color */
 text-align: center;
-padding-top: 6px;
-margin-left: 0;
+justify-content: space-evenly;
+margin: 0 20px;
+padding: 30px 0;
 font-size: 22px; /* Larger font size */
 cursor: pointer;
-margin-right: 20px;
-margin-bottom: 0;
+width: 210px;
 }
 
 .vertical-menu ul {
     list-style-type: none;
     padding: 0;
-    margin: 0;
-    width: 100%;
+    width: 210px;
     background-size: cover;
+    vertical-align: middle;
 }
 
 .vertical-menu ul li {
     margin-top: 20px;
-    margin-left: 0;  /* Espaçamento entre os itens da lista */
-    width: 100%;
+    width: 210px;
     padding: 0;
     background-size: cover;
-}
-
-.vertical-menu .submenu {
-    display: none;
-    position: absolute;
-    left: 0;
-    top: 100%;
-    background-color: darkblue;
-    justify-content: space-between;
-    text-align: center;
-    z-index: 1;
-    padding: 0;
-    margin: 0;
-    width: 100%;
+    vertical-align: middle;
 }
 
 .vertical-menu h3:hover + .submenu {
@@ -124,27 +110,26 @@ margin-bottom: 0;
 }
 
 .vertical-menu .submenu ul {
-    width: 100%;
-    padding: 0;
+    width: 210px;
     margin: 0;
 }
 
 .vertical-menu .submenu li {
-    width: 130%;
-    padding: 0;
+    width: 210px;
     margin: 0;
 }
 
 .vertical-menu .submenu a {
-    width: 100%;
+    width: 260px;
     padding: 0;
     margin: 0;
     background-size: contain;
+    vertical-align: middle;
 }
 
 /* Main Content Area */
 .content {
-margin-left: 250px; /* Adjusted to accommodate the sidebar */
+margin-left: 500px; /* Adjusted to accommodate the sidebar */
 padding: 20px;
 background-color: darkblue;
 }
@@ -184,13 +169,15 @@ list-style: none;
 }
 
 .horizontal-menu a:hover {
-background-color: #f0f0f0; /* Light grey on hover */
+background-color: lightsalmon; /* Light grey on hover */
 color: darkblue;
+transition: all 0.3s ease;
 }
 
 .horizontal-menu a.active {
 background-color: #04AA6D; /* Green for active item */
 color: darkblue;
+padding: 20px;
 }
 
 .search-bar input {
@@ -205,20 +192,48 @@ color: darkblue;
 }
 
 .submenu {
-    /* ... outras regras de estilo ... */
-    display: flexbox;
-    height: auto;
-    position: absolute;
-    top: 150%;
-    background-color: darkblue; /* Adicione a cor de fundo desejada */
-    background-size: cover;
-    justify-content: space-between;
-    width: 100%;
-    text-align: center;
-    margin: 0;
+    list-style-type: none;
     padding: 0;
+    margin: 0;
 }
 
+.submenu li {
+    margin: 0;
+    text-align: center;
+}
+
+/* Adiciona um pouco de estilo para destacar os itens do submenu ao passar o mouse */
+.submenu li:hover {
+    background-color: yellow;
+}
+
+/* Ajusta a posição dos submenus em relação aos h3 */
+#usersSubMenu,
+#articlesSubMenu {
+    position: absolute;
+    display: none;
+    top: 100%;
+    left: 0;
+    margin: 0;
+    width: 200px;
+}
+
+#usersSubMenu a {
+padding-bottom: 10px;
+padding-top: 10px;
+vertical-align: middle;
+}
+
+#articlesSubMenu a {
+padding-bottom: 10px;
+padding-top: 10px;
+vertical-align: middle;
+}
+
+h3:hover + #usersSubMenu,
+h3:hover + #articlesSubMenu {
+    display: block;
+}
 
 .search-bar {
 display: flex;
@@ -260,11 +275,11 @@ margin-left: 360px;
 }
 
 .div-content{
-margin-left: 270px;
+margin-left: 500px;
 }
 
 .div-content2{
-margin-left: 350px;
+margin-left: 280px;
 }
 
 #table-articles {
@@ -308,7 +323,7 @@ font-family: 'Arial', sans-serif;
 font-size: large;
 vertical-align: middle;
 display: flex;
-margin-left: 37%;
+margin-left: 34%;
 margin-right: 2%;
 
 
@@ -316,7 +331,7 @@ white-space: nowrap; /* Evita que o texto quebre em várias linhas */
 }
 
 .user-info .username {
-    color: yellow;  /* ou a cor desejada para o username */
+    color: orange;  /* ou a cor desejada para o username */
 }
 
 .user-info .username::before {
@@ -333,6 +348,7 @@ display: inline-flex;
 justify-content: flex-end;
 list-style: none;
 margin-left: 85%;
+font-size: 18px;
 }
 
 .search-bar {
