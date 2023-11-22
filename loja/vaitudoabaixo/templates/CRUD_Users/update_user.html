@@ -11,7 +11,8 @@
     <script src="https://kit.fontawesome.com/c035f4c5b7.js" crossorigin="anonymous"></script>
     <title>Update User</title>
 </head>
-<body>
+
+<header class="main">
     <div class="main">
         <div class="container">
             <div class="vert-menu" onmouseover="toggleMenu(event)" onmouseout="toggleMenu(event)">
@@ -71,7 +72,9 @@
         {% endif %}
     
     </div>
-    
+</header>
+
+<body>    
     <script src="{% static 'js/script.js' %}"></script>
 
     <div class="div-content">
@@ -82,7 +85,9 @@
             <p>Update a user:</p>
             <input type="text" name="username" maxlength="20" size="20" value="{{ user.username }}" placeholder="Username">
             <br/><br/>
-            <hr>
+   
+            <p>__________________________________________</p>
+    
             <p>Insert new data</p>
             <input type="text" name="new_username" maxlength="20" size="20" value="" placeholder="New username">
             <br/><br/>
@@ -93,7 +98,9 @@
             <p>Update your user:</p>
             <input type="text" name="username" maxlength="20" size="20" value="{{ user.username }}" placeholder="Username" readonly>
             <br/><br/>
-            <hr>
+   
+            <p>_________________________________</p>
+    
             <p>Insert new data</p>
             <input type="text" name="new_username" maxlength="20" size="20" value="" placeholder="New username">
             <br/><br/>

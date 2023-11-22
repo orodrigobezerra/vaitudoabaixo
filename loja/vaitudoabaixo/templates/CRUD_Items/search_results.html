@@ -7,7 +7,8 @@
     <script src="https://kit.fontawesome.com/c035f4c5b7.js" crossorigin="anonymous"></script>
     <title>Search Results</title>
 </head>
-<body>
+
+<header class="main">
     <div class="main">
         <div class="container">
             <div class="vert-menu" onmouseover="toggleMenu(event)" onmouseout="toggleMenu(event)">
@@ -67,7 +68,10 @@
         {% endif %}
     
     </div>
+    
+</header>
 
+<body>
     <div id="table-articles" class="div-content2">
         <h1 class="titles">Search Results for '{{ search_name }}'</h1>
         

@@ -11,7 +11,8 @@
         <script src="https://kit.fontawesome.com/c035f4c5b7.js" crossorigin="anonymous"></script>
         <title>Add Articles</title>
     </head>
-    <body>
+
+    <header class="main">
         <div class="main">
             <div class="container">
                 <div class="vert-menu" onmouseover="toggleMenu(event)" onmouseout="toggleMenu(event)">
@@ -51,7 +52,7 @@
                             <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
                         </div>
                     </form>
-    
+        
                     <div class="user-info">
                         Welcome, <span class="username">{{ user.username }}</span>
                     </div>
@@ -72,6 +73,9 @@
         
         </div>
         
+    </header>
+
+    <body>        
         <div class="div-content">
             <h1 class="titles">Add a new article</h1>
             {% if success %}

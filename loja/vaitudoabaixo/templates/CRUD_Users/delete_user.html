@@ -11,7 +11,8 @@
     <script src="https://kit.fontawesome.com/c035f4c5b7.js" crossorigin="anonymous"></script>
     <title>Delete User</title>
 </head>
-<body>
+
+<header class="main">
     <div class="main">
         <div class="container">
             <div class="vert-menu" onmouseover="toggleMenu(event)" onmouseout="toggleMenu(event)">
@@ -55,6 +56,7 @@
                 <div class="user-info">
                     Welcome, <span class="username">{{ user.username }}</span>
                 </div>
+                
                 <form action="{% url 'logout' %}" method="post">
                     {% csrf_token %}
                     <input type="submit" value="Logout">
@@ -71,6 +73,9 @@
     
     </div>
     
+</header>
+
+<body>    
     <script src="{% static 'js/script.js' %}"></script>
 
     <div class="div-content">

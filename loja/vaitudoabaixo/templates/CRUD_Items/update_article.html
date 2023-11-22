@@ -11,7 +11,8 @@
     <script src="https://kit.fontawesome.com/c035f4c5b7.js" crossorigin="anonymous"></script>
     <title>Update Article</title>
 </head>
-<body>
+
+<header class="main">
     <div class="main">
         <div class="container">
             <div class="vert-menu" onmouseover="toggleMenu(event)" onmouseout="toggleMenu(event)">
@@ -71,19 +72,23 @@
         {% endif %}
     
     </div>
+    
+</header>
 
+<body>
     <div class="div-content">
         <h1 class="titles">Update Article</h1>
         <form id="myform" method="post" action="{% url 'update_articles' %}">
             {% csrf_token %}
             <p>Insert ID to update article:</p>
             <input type="text" name="id" maxlength="20" size="20" value="" placeholder="ID">
-            <br/><br/>
-            <hr>
+   
+            <p>__________________________________________</p>
+    
             <p>Insert new data</p>
-            <input type="text" name="new_name" maxlength="100" size="100" value="" placeholder="New name">
+            <input type="text" name="new_name" maxlength="100" size="50" value="" placeholder="New name">
             <br/><br/>
-            <input type="text" name="new_color" size="100" value="" placeholder="Nova color">
+            <input type="text" name="new_color" size="50" value="" placeholder="Nova color">
             <br/><br/>
             <label for="instrument">Instrument:</label>
             <select id="instrument" name="instrument">
@@ -94,11 +99,11 @@
                 <!-- Adicione mais opções conforme necessário -->
             </select>
             <br/><br/>
-            <input type="text" name="new_qtystock" size="100" value="" placeholder="New Qty Stock">
+            <input type="text" name="new_qtystock" size="50" value="" placeholder="New Qty Stock">
             <br/><br/>
-            <input type="text" step="0.01" name="new_price" maxlength="100" size="100" value="" placeholder="New Price">
+            <input type="text" step="0.01" name="new_price" maxlength="50" size="50" value="" placeholder="New Price">
             <br/><br/>
-            <input type="text" name="new_image" maxlength="255" size="100" value="" placeholder="New Image">
+            <input type="text" name="new_image" maxlength="255" size="50" value="" placeholder="New Image">
             <br/><br/>
             <input type="submit" value="Update">
         </form>

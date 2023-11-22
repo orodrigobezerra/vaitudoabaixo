@@ -12,66 +12,68 @@
     <script src="https://kit.fontawesome.com/c035f4c5b7.js" crossorigin="anonymous"></script>
     <title>Articles List</title>
 </head>
-
-<div class="main">
-    <div class="container">
-        <div class="vert-menu" onmouseover="toggleMenu(event)" onmouseout="toggleMenu(event)">
-            <img class="logo-header" src="{% static 'images/VaiTudoAbaixo-LOGO-white.png' %}" alt="Logo" width="100">
-            <div id="menu" style="display: none;">
-                <h1>BackEnd</h1>
-                <br/>
-                <div class="vertical-menu">
-                    <h3 onmouseover="toggleSubMenu('usersSubMenu')">Users</h3>
-                    <ul id="usersSubMenu" class="submenu" style="display: none;">
-                        <li><a href="../list_users" target="_self">Users List</a></li>
-                        <li><a href="../regist_user" target="_self">Register User</a></li>
-                        <li><a href="../update_user" target="_self">Update User</a></li>
-                        <li><a href="../delete_user" target="_self">Delete User</a></li>
-                    </ul>
-                    
-                    <h3 onmouseover="toggleSubMenu('articlesSubMenu')">Articles</h3>
-                    <ul id="articlesSubMenu" class="submenu" style="display: none;">
-                        <li><a href="" target="_self">Articles List</a></li>
-                    <li><a href="../add_articles" target="_self">Add Article</a></li>
-                    <li><a href="../search_articles" target="_self">Search Article</a></li>
-                    <li><a href="../update_articles" target="_self">Update Article</a></li>
-                    <li><a href="../delete_articles" target="_self">Delete Article</a></li>
-                    </ul>
+<header class="main">
+    <div class="main">
+        <div class="container">
+            <div class="vert-menu" onmouseover="toggleMenu(event)" onmouseout="toggleMenu(event)">
+                <img class="logo-header" src="{% static 'images/VaiTudoAbaixo-LOGO-white.png' %}" alt="Logo" width="100">
+                <div id="menu" style="display: none;">
+                    <h1>BackEnd</h1>
+                    <br/>
+                    <div class="vertical-menu">
+                        <h3 onmouseover="toggleSubMenu('usersSubMenu')">Users</h3>
+                        <ul id="usersSubMenu" class="submenu" style="display: none;">
+                            <li><a href="../list_users" target="_self">Users List</a></li>
+                            <li><a href="../regist_user" target="_self">Register User</a></li>
+                            <li><a href="../update_user" target="_self">Update User</a></li>
+                            <li><a href="../delete_user" target="_self">Delete User</a></li>
+                        </ul>
+                        
+                        <h3 onmouseover="toggleSubMenu('articlesSubMenu')">Articles</h3>
+                        <ul id="articlesSubMenu" class="submenu" style="display: none;">
+                            <li><a href="" target="_self">Articles List</a></li>
+                        <li><a href="../add_articles" target="_self">Add Article</a></li>
+                        <li><a href="../search_articles" target="_self">Search Article</a></li>
+                        <li><a href="../update_articles" target="_self">Update Article</a></li>
+                        <li><a href="../delete_articles" target="_self">Delete Article</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
+    
+        {% if user.is_authenticated %}
+            <!-- Se o usuário estiver autenticado, mostre a mensagem de boas-vindas e o botão de logout -->
+            <div class="horizontal-menu">
+                <form class="search-bar" method="post" action="{% url 'search_articles' %}">
+                    {% csrf_token %}
+                    <div class="search-container">
+                        <input type="text" name="search_name" placeholder="Search by name">
+                        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+                    </div>
+                </form>
+    
+                <div class="user-info">
+                    Welcome, <span class="username">{{ user.username }}</span>
+                </div>
+                
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Logout">
+                </form>
+            </div> 
+    
+        {% else %}
+            <!-- Se o usuário não estiver autenticado, mostre os botões Login e Register -->
+            <div class="horizontal-menu">                
+                <a href="{% url 'user_login' %}" target="_self">Login</a>
+                <a href="{% url 'regist_user' %}" target="_self">Register</a>
+            </div>
+        {% endif %}
+    
     </div>
-
-    {% if user.is_authenticated %}
-        <!-- Se o usuário estiver autenticado, mostre a mensagem de boas-vindas e o botão de logout -->
-        <div class="horizontal-menu">
-            <form class="search-bar" method="post" action="{% url 'search_articles' %}">
-                {% csrf_token %}
-                <div class="search-container">
-                    <input type="text" name="search_name" placeholder="Search by name">
-                    <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
-                </div>
-            </form>
-
-            <div class="user-info">
-                Welcome, <span class="username">{{ user.username }}</span>
-            </div>
-            
-            <form action="{% url 'logout' %}" method="post">
-                {% csrf_token %}
-                <input type="submit" value="Logout">
-            </form>
-        </div> 
-
-    {% else %}
-        <!-- Se o usuário não estiver autenticado, mostre os botões Login e Register -->
-        <div class="horizontal-menu">                
-            <a href="{% url 'user_login' %}" target="_self">Login</a>
-            <a href="{% url 'regist_user' %}" target="_self">Register</a>
-        </div>
-    {% endif %}
-
-</div>
+    
+</header>
 
 <body>
     <div id="table-articles" class="div-content2">

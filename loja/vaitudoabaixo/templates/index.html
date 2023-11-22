@@ -10,7 +10,8 @@
     <script src="https://kit.fontawesome.com/c035f4c5b7.js" crossorigin="anonymous"></script>
     <title>Vai Tudo Abaixo</title>
 </head>
-<body>
+
+<header class="main">
     <div class="main">
         <div class="container">
             <div class="vert-menu" onmouseover="toggleMenu(event)" onmouseout="toggleMenu(event)">
@@ -50,7 +51,7 @@
                         <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
                     </div>
                 </form>
-
+    
                 <div class="user-info">
                     Welcome, <span class="username">{{ user.username }}</span>
                 </div>
@@ -70,6 +71,10 @@
         {% endif %}
     
     </div>
+    
+</header>
+
+<body>
     <div>
         <img class="logo-body" src="{% static 'images/VaiTudoAbaixo-LOGO2.png' %}" alt="Logo" width="40%">
     </div>

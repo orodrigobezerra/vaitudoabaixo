@@ -11,7 +11,8 @@
     <script src="https://kit.fontawesome.com/c035f4c5b7.js" crossorigin="anonymous"></script>
     <title>Add Users</title>
 </head>
-<body>
+
+<header class="main">
     {% if user.is_authenticated %}
     <div class="main">
         <div class="container">
@@ -23,8 +24,8 @@
                     <div class="vertical-menu">
                         <h3 onmouseover="toggleSubMenu('usersSubMenu')">Users</h3>
                         <ul id="usersSubMenu" class="submenu" style="display: none;">
-                            <li><a href="" target="_self">Users List</a></li>
-                            <li><a href="../regist_user" target="_self">Register User</a></li>
+                            <li><a href="../list_users" target="_self">Users List</a></li>
+                            <li><a href="" target="_self">Register User</a></li>
                             <li><a href="../update_user" target="_self">Update User</a></li>
                             <li><a href="../delete_user" target="_self">Delete User</a></li>
                         </ul>
@@ -92,7 +93,9 @@
     {% endif %}
     
     </div>
+</header>
 
+<body>
     <div class="div-content">
         <h1 class="titles">Register a new user</h1>
         {% if success %}
