@@ -7,7 +7,7 @@ background: lightgray;
 p {
 font-family: 'Arial', sans-serif;
 color: darkblue;
-font-size: large;
+font-size: medium;
 font-weight: bold;
 }
 
@@ -95,7 +95,8 @@ width: 210px;
 }
 
 .vertical-menu ul li {
-    margin-top: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     width: 210px;
     padding: 0;
     background-size: cover;
@@ -129,7 +130,7 @@ width: 210px;
 
 /* Main Content Area */
 .content {
-margin-left: 500px; /* Adjusted to accommodate the sidebar */
+margin-left: 500px;
 padding: 20px;
 background-color: darkblue;
 }
@@ -282,11 +283,20 @@ padding-top: 80px;
 margin-bottom: 80px;
 display: block;
 margin-left: 360px;
+}
 
+.logo-body-trans{
+position: fixed; /* Permite que a imagem fique fixa na tela */
+top: 50%; /* Posiciona a imagem no centro verticalmente */
+left: 50%; /* Posiciona a imagem no centro horizontalmente */
+transform: translate(-50%, -50%); /* Centraliza a imagem precisamente */
+opacity: 0.1; /* Ajuste o valor conforme necessário para a transparência desejada */
+z-index: -1; /* Coloca a imagem atrás do conteúdo */
 }
 
 .div-content{
-margin-left: 500px;
+margin-left: 560px;
+margin-top: 100px; /* Adjusted to accommodate the sidebar */
 }
 
 .div-content2{
@@ -299,7 +309,14 @@ border-collapse: collapse;
 width: 70%;
 }
 
-#table-articles td, #table-articles th {
+#table-articles td {
+border: 1px solid #ddd;
+padding: 8px;
+background: white;
+opacity: 0.6;
+}
+
+#table-articles th {
 border: 1px solid #ddd;
 padding: 8px;
 background: white;
@@ -307,13 +324,18 @@ background: white;
 
 .table-article-name{
 width: 40%;
+opacity: 0.6;
 }
 
 .table-article-name2{
 text-align: center;
 }
 
-#table-articles tr:hover {background-color: #ddd;}
+#table-articles tr:hover {
+background-color: lightsteelblue;
+color: darkblue;
+font-weight: bolder;
+}
 
 #table-articles th {
 padding-top: 12px;
@@ -333,6 +355,7 @@ width: 70%;
 border: 1px solid #ddd;
 padding: 8px;
 background: white;
+opacity: 0.7;
 }
 
 .table-user-name{
@@ -342,6 +365,7 @@ font-family: Arial, Helvetica, sans-serif;
 background: white;
 padding-top: 6px;
 padding-bottom: 6px;
+opacity: 0.6;
 }
 
 .table-user-name2{
@@ -351,9 +375,14 @@ font-family: Arial, Helvetica, sans-serif;
 background: white;
 padding-top: 6px;
 padding-bottom: 6px;
+opacity: 0.6;
 }
 
-#table-users tr:hover {background-color: #ddd;}
+.table-users td, th, tr:hover {
+background-color: lightsteelblue;
+color: darkblue;
+font-weight: bolder;
+}
 
 #table-users th {
 padding-top: 6px;

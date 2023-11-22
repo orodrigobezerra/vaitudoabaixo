@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Articles, User
 from django.contrib.auth import authenticate, login as auth_login, get_user_model
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 from django.http import StreamingHttpResponse, HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
@@ -122,9 +123,10 @@ def delete_article(request):
 @login_required(login_url='user_login')
 def list_users(request):
     # Filtrar usuários excluindo superusuários
-    users = get_user_model().objects.filter(is_superuser=False)
+    users = get_user_model().objects.all()
 
     return render(request, 'crud_users/list_users.html', {'users': users})
+
 
 def regist_user(request):
     if request.method == 'POST':

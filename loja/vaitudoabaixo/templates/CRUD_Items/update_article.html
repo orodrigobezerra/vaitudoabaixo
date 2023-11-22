@@ -85,7 +85,14 @@
             <br/><br/>
             <input type="text" name="new_color" size="100" value="" placeholder="Nova color">
             <br/><br/>
-            <input type="text" name="new_instrument" maxlength="100" size="100" value="" placeholder="New instrument">
+            <label for="instrument">Instrument:</label>
+            <select id="instrument" name="instrument">
+                <option value="" disabled selected>Select</option>
+                <option value="Acustica">Acustica</option>
+                <option value="Baixo">Baixo</option>
+                <option value="Eletrica">Eletrica</option>
+                <!-- Adicione mais opções conforme necessário -->
+            </select>
             <br/><br/>
             <input type="text" name="new_qtystock" size="100" value="" placeholder="New Qty Stock">
             <br/><br/>
@@ -97,6 +104,10 @@
         </form>
         <p></p>
         <a href=".." target="_self">Back to home</a>
+    </div>
+
+    <div>
+        <img class="logo-body-trans" src="{% static 'images/VaiTudoAbaixo-LOGO2.png' %}" alt="Logo" width="40%">
     </div>
 
     <script src="{% static 'js/script.js' %}"></script>
