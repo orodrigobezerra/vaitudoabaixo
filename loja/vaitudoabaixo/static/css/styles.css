@@ -2,7 +2,7 @@ body {
 margin: 0;
 padding: 0;
 background: lightgray;
-margin-top: 120px;
+margin-top: 140px;
 }
 
 p {
@@ -305,14 +305,14 @@ text-align: left;
 }
 
 .logo-body{
-padding-top: 200px;
-display: block;
+display: flex;
 margin-left: 480px;
+margin-top: 250px;
 }
 
 .logo-body2{
 padding-top: 80px;
-margin-bottom: 80px;
+margin-bottom: 50px;
 display: block;
 margin-left: 290px;
 }
@@ -327,7 +327,7 @@ z-index: -1; /* Coloca a imagem atrás do conteúdo */
 }
 
 .div-content{
-margin-left: 480px;
+margin-left: 380px;
 margin-top: 100px; /* Adjusted to accommodate the sidebar */
 }
 
