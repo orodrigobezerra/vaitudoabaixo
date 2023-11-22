@@ -1,9 +1,14 @@
-/* Sidebar Menu */
-
 body {
 margin: 0;
 padding: 0;
 background: lightgray;
+}
+
+p {
+font-family: 'Arial', sans-serif;
+color: darkblue;
+font-size: large;
+font-weight: bold;
 }
 
 .container {
@@ -65,7 +70,7 @@ background-color: darkblue;
 }
 
 .vertical-menu a:hover {
-background-color: lightsalmon; /* Light grey on hover */
+background-color: orange; /* Light grey on hover */
 color: darkblue;
 }
 
@@ -251,7 +256,7 @@ h3:hover + #articlesSubMenu {
 }
 
 .search-bar button.search-button:hover {
-    background-color: lightsalmon;
+    background-color: lightgoldenrodyellow;
 }
 
 .user-links {
@@ -314,6 +319,46 @@ text-align: center;
 padding-top: 12px;
 padding-bottom: 12px;
 text-align: left;
+background-color: darkblue;
+color: white;
+}
+
+#table-users {
+font-family: Arial, Helvetica, sans-serif;
+border-collapse: collapse;
+width: 70%;
+}
+
+#table-users td {
+border: 1px solid #ddd;
+padding: 8px;
+background: white;
+}
+
+.table-user-name{
+width: 150px;
+text-align: center;
+font-family: Arial, Helvetica, sans-serif;
+background: white;
+padding-top: 6px;
+padding-bottom: 6px;
+}
+
+.table-user-name2{
+text-align: center;
+width: 50px;
+font-family: Arial, Helvetica, sans-serif;
+background: white;
+padding-top: 6px;
+padding-bottom: 6px;
+}
+
+#table-users tr:hover {background-color: #ddd;}
+
+#table-users th {
+padding-top: 6px;
+padding-bottom: 6px;
+text-align: center;
 background-color: darkblue;
 color: white;
 }

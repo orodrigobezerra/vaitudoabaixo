@@ -77,15 +77,23 @@
     <div class="div-content">
         <h1 class="titles">Users List</h1>
         <table border="1">
-            <tr>
+            <tr id="table-users">
                 <th>ID</th>
                 <th>Username</th>
+                <th>Level</th>
             </tr>
 
             {% for user in users %}
             <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.username }}</td>
+                <td class="table-user-name2">{{ user.id }}</td>
+                <td class="table-user-name">{{ user.username }}</td>
+                <td class="table-user-name">
+                    {% if user.superuser %}
+                        Admin
+                    {% else %}
+                        Staff
+                    {% endif %}
+                </td>
             </tr>
             {% endfor %}
         </table>
