@@ -495,3 +495,49 @@ margin-right: 5px; /* Espaçamento à direita entre o ícone e o texto */
 .button-container {
 display: flex;
 }
+
+@media only screen and (max-width: 1024px) {
+    body {
+        margin-top: 100px;
+    }
+
+    .logo-body {
+        margin-left: 280px;
+    }
+
+    .div-content {
+        margin-left: 280px;
+    }
+
+    .horizontal-menu2 a {
+        margin-left: 0;
+    }
+
+    .export-button-pdf {
+        margin-left: 0;
+        margin-right: 10px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    body {
+        margin-top: 80px;
+    }
+
+    .logo-body {
+        margin-left: 20px;
+    }
+
+    .div-content {
+        margin-left: 20px;
+    }
+
+    .horizontal-menu2 a {
+        margin-left: 0;
+    }
+
+    .export-button-pdf {
+        margin-left: 0;
+        margin-right: 10px;
+    }
+}
