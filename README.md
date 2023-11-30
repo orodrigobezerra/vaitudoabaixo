@@ -1,5 +1,7 @@
 # vaitudoabaixo
 Vaitudoabaixo is a project of a web store of musical instruments developed in Python with Django framework
+![WhatsApp Image 2023-11-30 at 11 00 36](https://github.com/orodrigobezerra/vaitudoabaixo/assets/141685462/2f4f695c-cd55-4d3f-b2a4-bd25143ecc0d)
+
 
 Some pictures of Backend structure:
 
