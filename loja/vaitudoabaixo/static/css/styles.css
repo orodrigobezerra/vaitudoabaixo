@@ -132,96 +132,81 @@ width: 210px;
 
 /* Main Content Area */
 .content {
-margin-left: 450px;
-padding: 20px;
-background-color: darkblue;
+    margin-left: 450px;
+    padding: 20px;
+    background-color: darkblue;
 }
 
 /* Footer */
 .footer {
-text-align: center;
-background: linear-gradient(to bottom, #ffffff, #f9f9f9); /* Soft white gradient */
-color: #292929; /* Dark text color */
-padding: 12px;
-margin: 0;
-font-size: 14px; /* Slightly smaller font size */
+    text-align: center;
+    background: linear-gradient(to bottom, #ffffff, #f9f9f9); /* Soft white gradient */
+    color: #292929; /* Dark text color */
+    padding: 12px;
+    margin: 0;
+    font-size: 14px; /* Slightly smaller font size */
 }
 
 /* Search Bar Style */
 .horizontal-menu {
-background: linear-gradient(to bottom, darkblue, darkblue);
-padding: 20px 40px 20px 20px;
-align-items: center;
-display: flex;
-width: auto;
-background-color: darkblue;
-list-style: none;
-justify-content: space-between;
+    background: linear-gradient(to bottom, darkblue, darkblue);
+    padding: 20px 40px 20px 20px;
+    align-items: center;
+    display: flex;
+    width: auto;
+    background-color: darkblue;
+    list-style: none;
+    justify-content: space-between;
 }
 
 .horizontal-menu a{
-color: white;
-text-decoration: none;
-font-family: 'Arial', sans-serif; 
-text-align: center;
-vertical-align: middle;
-display: inline-flex;
-justify-content: flex-end;
-margin-right: 30px;
-list-style: none;
+    color: white;
+    text-decoration: none;
+    font-family: 'Arial', sans-serif; 
+    text-align: center;
+    vertical-align: middle;
+    display: inline-flex;
+    justify-content: flex-end;
+    margin-right: 30px;
+    list-style: none;
 }
 
 .horizontal-menu a:hover {
-background-color: orange; /* Light grey on hover */
-color: darkblue;
-transition: all 0.3s ease;
+    background-color: orange; /* Light grey on hover */
+    color: darkblue;
+    transition: all 0.3s ease;
 }
 
 .horizontal-menu2 {
-background: linear-gradient(to bottom, darkblue, darkblue);
-padding: 38.5px 40px 20px 20px;
-align-items: center;
-display: flex;
-width: auto;
-background-color: darkblue;
-list-style: none;
-justify-content: space-between;
+    background: linear-gradient(to bottom, darkblue, darkblue);
+    padding: 38.5px 40px 20px 20px;
+    align-items: center;
+    display: flex;
+    width: auto;
+    background-color: darkblue;
+    list-style: none;
+    justify-content: space-between;
 }
 
 .horizontal-menu2 a{
-color: white;
-text-decoration: none;
-font-family: 'Arial', sans-serif; 
-text-align: center;
-vertical-align: middle;
-display: inline-flex;
-justify-content: flex-end;
-margin-right: 0;
-margin-left: 900px;
-list-style: none;
+    color: white;
+    text-decoration: none;
+    font-family: 'Arial', sans-serif; 
+    text-align: center;
+    vertical-align: middle;
+    display: inline-flex;
+    justify-content: flex-end;
+    margin-right: 0;
+    margin-left: 900px;
+    list-style: none;
 }
 
 .horizontal-menu2 a:hover {
-background-color: orange; /* Light grey on hover */
-color: darkblue;
-transition: all 0.3s ease;
+    background-color: orange; /* Light grey on hover */
+    color: darkblue;
+    transition: all 0.3s ease;
 }
 
-.submenu {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-.submenu li {
-    margin: 0;
-    text-align: center;
-}
-
-/* Adiciona um pouco de estilo para destacar os itens do submenu ao passar o mouse */
-.submenu li:hover {
-    background-color: yellow;
-}
 
 /* Ajusta a posição dos submenus em relação aos h3 */
 #usersSubMenu,
@@ -232,6 +217,7 @@ transition: all 0.3s ease;
     left: 0;
     margin: 0;
     width: 200px;
+    text-align: center;
 }
 
 #usersSubMenu a {
@@ -242,7 +228,7 @@ transition: all 0.3s ease;
 }
 
 #articlesSubMenu a {
-    padding-bottom: 10px;
+    padding-bottom: 15px;
     padding-top: 10px;
     vertical-align: middle;
     cursor: pointer;
@@ -288,156 +274,153 @@ h3:hover + #articlesSubMenu {
     outline: none;
 }
 
-.search-bar button.search-button:hover {
-    background-color: lightgoldenrodyellow;
-}
 
 .user-links {
-display: flex;
-align-items: center;
-margin-right: 0; /* Adjust this value as needed */
-padding: 7px;
+    display: flex;
+    align-items: center;
+    margin-right: 0; 
+    padding: 7px;
 }
 
 ul{
-list-style-type: none;
-text-align: left;
+    list-style-type: none;
+    text-align: left;
 }
 
 .logo-body{
-display: flex;
-margin-left: 480px;
-margin-top: 250px;
+    display: flex;
+    margin-left: 480px;
+    margin-top: 250px;
 }
 
 .logo-body2{
-padding-top: 80px;
-margin-bottom: 50px;
-display: block;
-margin-left: 290px;
+    padding-top: 80px;
+    margin-bottom: 50px;
+    display: block;
+    margin-left: 290px;
 }
 
 .logo-body-trans{
-position: fixed; /* Permite que a imagem fique fixa na tela */
-top: 50%; /* Posiciona a imagem no centro verticalmente */
-left: 50%; /* Posiciona a imagem no centro horizontalmente */
-transform: translate(-50%, -50%); /* Centraliza a imagem precisamente */
-opacity: 0.1; /* Ajuste o valor conforme necessário para a transparência desejada */
-z-index: -1; /* Coloca a imagem atrás do conteúdo */
+    position: fixed; /* Permite que a imagem fique fixa na tela */
+    top: 50%; /* Posiciona a imagem no centro verticalmente */
+    left: 50%; /* Posiciona a imagem no centro horizontalmente */
+    transform: translate(-50%, -50%); /* Centraliza a imagem precisamente */
+    opacity: 0.1; /* Ajuste o valor conforme necessário para a transparência desejada */
+    z-index: -1; /* Coloca a imagem atrás do conteúdo */
 }
 
 .div-content{
-margin-left: 380px;
-margin-top: 100px; /* Adjusted to accommodate the sidebar */
+    margin-left: 380px;
+    margin-top: 100px; /* Adjusted to accommodate the sidebar */
 }
 
 .div-content2{
-margin-left: 280px;
+    margin-left: 280px;
 }
 
 #table-articles {
-font-family: Arial, Helvetica, sans-serif;
-border-collapse: collapse;
-width: 70%;
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 70%;
 }
 
 #table-articles td {
-border: 1px solid #ddd;
-padding: 8px;
-background: white;
-opacity: 0.6;
+    border: 1px solid #ddd;
+    padding: 8px;
+    background: white;
+    opacity: 0.6;
 }
 
 #table-articles th {
-border: 1px solid #ddd;
-padding: 8px;
-background: white;
+    border: 1px solid #ddd;
+    padding: 8px;
+    background: white;
 }
 
 .table-article-name{
-width: 40%;
-opacity: 0.6;
+    width: 40%;
+    opacity: 0.6;
 }
 
 .table-article-name2{
-text-align: center;
+    text-align: center;
 }
 
 #table-articles tr:hover {
-background-color: lightsteelblue;
-color: darkblue;
-font-weight: bolder;
+    background-color: lightsteelblue;
+    color: darkblue;
+    font-weight: bolder;
 }
 
 #table-articles th {
-padding-top: 12px;
-padding-bottom: 12px;
-text-align: left;
-background-color: darkblue;
-color: white;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: darkblue;
+    color: white;
 }
 
 #table-users {
-font-family: Arial, Helvetica, sans-serif;
-border-collapse: collapse;
-width: 70%;
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 70%;
 }
 
 #table-users td {
-border: 1px solid #ddd;
-padding: 8px;
-background: white;
-opacity: 0.7;
+    border: 1px solid #ddd;
+    padding: 8px;
+    background: white;
+    opacity: 0.7;
 }
 
 .table-user-name{
-width: 150px;
-text-align: center;
-font-family: Arial, Helvetica, sans-serif;
-background: white;
-padding-top: 6px;
-padding-bottom: 6px;
-opacity: 0.6;
+    width: 150px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    background: white;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    opacity: 0.6;
 }
 
 .table-user-name2{
-text-align: center;
-width: 50px;
-font-family: Arial, Helvetica, sans-serif;
-background: white;
-padding-top: 6px;
-padding-bottom: 6px;
-opacity: 0.6;
+    text-align: center;
+    width: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+    background: white;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    opacity: 0.6;
 }
 
 .table-users td, th, tr:hover {
-background-color: lightsteelblue;
-color: darkblue;
-font-weight: bolder;
+    background-color: lightsteelblue;
+    color: darkblue;
+    font-weight: bolder;
 }
 
 #table-users th {
-padding-top: 6px;
-padding-bottom: 6px;
-text-align: center;
-background-color: darkblue;
-color: white;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    text-align: center;
+    background-color: darkblue;
+    color: white;
 }
 
 .titles {
-color: darkblue;
-font-family: 'Arial', sans-serif; 
+    color: darkblue;
+    font-family: 'Arial', sans-serif; 
 }
 
 .user-info {
-color: white;
-font-family: 'Arial', sans-serif;
-font-size: large;
-vertical-align: middle;
-display: flex;
-margin-left: 20%;
-margin-right: 0;
-white-space: nowrap; /* Evita que o texto quebre em várias linhas */
+    color: white;
+    font-family: 'Arial', sans-serif;
+    font-size: large;
+    vertical-align: middle;
+    display: flex;
+    margin-left: 20%;
+    margin-right: 0;
+    white-space: nowrap; /* Evita que o texto quebre em várias linhas */
 }
 
 .user-info .username {
@@ -449,95 +432,49 @@ white-space: nowrap; /* Evita que o texto quebre em várias linhas */
 }
 
 .user-info2 {
-color: white;
-text-decoration: none;
-font-family: 'Arial', sans-serif; 
-text-align: center;
-vertical-align: middle;
-display: inline-flex;
-justify-content: flex-end;
-list-style: none;
-margin-left: 85%;
-font-size: 18px;
-padding-top: 15.2px;
+    color: white;
+    text-decoration: none;
+    font-family: 'Arial', sans-serif; 
+    text-align: center;
+    vertical-align: middle;
+    display: inline-flex;
+    justify-content: flex-end;
+    list-style: none;
+    margin-left: 85%;
+    font-size: 18px;
+    padding-top: 15.2px;
 }
 
 .export-button-csv {
-display: inline-flex;
-padding: 10px 20px;
-background-color: #4CAF50; /* Cor de fundo do botão */
-color: white; /* Cor do texto do botão */
-border: none;
-border-radius: 5px;
-cursor: pointer;
+    display: inline-flex;
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Cor de fundo do botão */
+    color: white; /* Cor do texto do botão */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .export-button-csv i {
-margin-right: 5px; /* Espaçamento à direita entre o ícone e o texto */
+    margin-right: 5px; /* Espaçamento à direita entre o ícone e o texto */
 }
 
 .export-button-pdf {
-display: inline-flex;
-padding: 10px 20px;
-background-color: #e44d26;
-color: white; /* Cor do texto do botão */
-border: none;
-border-radius: 5px;
-cursor: pointer;
-margin-left: 880px;
-margin-right: 10px;
+    display: inline-flex;
+    padding: 10px 20px;
+    background-color: #e44d26;
+    color: white; /* Cor do texto do botão */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 880px;
+    margin-right: 10px;
 }
 
 .export-button-pdf i {
-margin-right: 5px; /* Espaçamento à direita entre o ícone e o texto */
+    margin-right: 5px; /* Espaçamento à direita entre o ícone e o texto */
 }
 
 .button-container {
-display: flex;
-}
-
-@media only screen and (max-width: 1024px) {
-    body {
-        margin-top: 100px;
-    }
-
-    .logo-body {
-        margin-left: 280px;
-    }
-
-    .div-content {
-        margin-left: 280px;
-    }
-
-    .horizontal-menu2 a {
-        margin-left: 0;
-    }
-
-    .export-button-pdf {
-        margin-left: 0;
-        margin-right: 10px;
-    }
-}
-
-@media only screen and (max-width: 600px) {
-    body {
-        margin-top: 80px;
-    }
-
-    .logo-body {
-        margin-left: 20px;
-    }
-
-    .div-content {
-        margin-left: 20px;
-    }
-
-    .horizontal-menu2 a {
-        margin-left: 0;
-    }
-
-    .export-button-pdf {
-        margin-left: 0;
-        margin-right: 10px;
-    }
+    display: flex;
 }
